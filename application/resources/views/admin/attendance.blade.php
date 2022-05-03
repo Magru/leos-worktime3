@@ -166,7 +166,6 @@
 </div>
 @endsection
 
-<p class="small-form-text">* המבצע לזמן מוגבל בתוקף עד 30.6.2022. ט.ל.ח.</p>
 
 @section('scripts')
     <script src="{{ asset('assets/js/validate-form.js') }}"></script>

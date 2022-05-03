@@ -42,11 +42,13 @@
                         <label for="firstname" class="form-label">{{ __("First Name") }}</label>
                         <input type="text" name="firstname" value="" class="form-control text-uppercase" required>
                     </div>
+                    @if(0)
                     <div class="mb-3 col-md-2">
                         <label for="mi" class="form-label">{{ __("Middle Name") }}</label>
                         <input type="text" name="mi" value="" class="form-control text-uppercase">
                     </div>
-                    <div class="mb-3 col-md-4">
+                    @endif
+                    <div class="mb-3 col-md-6">
                         <label for="lastname" class="form-label">{{ __("Last Name") }}</label>
                         <input type="text" name="lastname" value="" class="form-control text-uppercase" required>
                     </div>
@@ -73,7 +75,7 @@
 
                 <div class="row g-2">
                     <div class="mb-3 col-md-6">
-                        <label for="emailaddress" class="form-label">{{ __("Email Address") }} <small class="text-muted">(personal)</small></label>
+                        <label for="emailaddress" class="form-label">{{ __("Email Address") }} <small class="text-muted">(אישי)</small></label>
                         <input type="email" name="emailaddress" value="" class="form-control text-lowercase" required>
                     </div>
                     <div class="mb-3 col-md-6">
@@ -119,7 +121,7 @@
                 <div class="mb-3">
                   <label for="company" class="form-label">{{ __("Company") }}</label>
                   <select name="company" class="form-select text-uppercase">
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     @isset($company)
                         @foreach ($company as $data)
                             <option value="{{ $data->company }}"> {{ $data->company }}</option>
@@ -131,7 +133,7 @@
                 <div class="mb-3">
                   <label for="department" class="form-label">{{ __("Department") }}</label>
                   <select name="department" class="form-select text-uppercase">
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     @isset($department)
                         @foreach ($department as $data)
                             <option value="{{ $data->department }}"> {{ $data->department }}</option>
@@ -143,7 +145,7 @@
                 <div class="mb-3">
                   <label for="jobtitle" class="form-label">{{ __("Job Title") }}</label>
                   <select name="jobtitle" class="form-select text-uppercase">
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     @isset($jobtitle)
                         @foreach ($jobtitle as $data)
                             <option value="{{ $data->jobtitle }}"> {{ $data->jobtitle }}</option>
@@ -165,7 +167,7 @@
                 <div class="mb-3">
                   <label for="leaveprivilege" class="form-label">{{ __("Leave Group") }}</label>
                   <select name="leaveprivilege" class="form-select text-uppercase">
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     @isset($leavegroup)
                         @foreach ($leavegroup as $data)
                             <option value="{{ $data->id }}"> {{ $data->leavegroup }}</option>
@@ -180,7 +182,7 @@
                 <div class="mb-3">
                   <label for="employmenttype" class="form-label">{{ __("Employment Type") }}</label>
                   <select name="employmenttype" class="form-select text-uppercase" required>
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     <option value="Regular">{{ __("Regular") }}</option>
                     <option value="Trainee">{{ __("Trainee") }}</option>
                   </select>
@@ -189,7 +191,7 @@
                 <div class="mb-3">
                   <label for="employmentstatus" class="form-label">{{ __("Employment Status") }}</label>
                   <select name="employmentstatus" class="form-select text-uppercase" required>
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     <option value="Active">{{ __("Active") }}</option>
                     <option value="Archived">{{ __("Archived") }}</option>
                   </select>
