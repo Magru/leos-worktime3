@@ -530,3 +530,10 @@ table thead th,
 table tfoot th{
     text-align: center;
 }
+div.dataTables_wrapper div.dataTables_filter{
+    text-align: left!important;
+}
+div.dataTables_wrapper div.dataTables_filter input{
+    margin-left: 0!important;
+    margin-right: 0.5em;
+}

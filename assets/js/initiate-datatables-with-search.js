@@ -14,6 +14,9 @@
         pageLength: 15,
         lengthChange: false,
         searching: true,
-        ordering: true
+        ordering: true,
+        "language": {
+            "search": "חיפוש"
+        }
     });
 })();

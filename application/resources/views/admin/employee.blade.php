@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('meta')
-    <title>Employee | Workday Time Clock</title>
+    <title>עובדים | Leos</title>
     <meta name="description" content="Workday Employee">
 @endsection
 
@@ -60,15 +60,17 @@
                 <tbody>
                     @isset($employees)
                     @foreach ($employees as $employee)
-                        <tr>
+                        <tr class="@if($employee->employmentstatus != 'Active') red-cell @else  @endif">
                             <td>{{ $employee->idno }}</td>
                             <td>{{ $employee->lastname }}, {{ $employee->firstname }}</td>
                             <td>{{ $employee->company }}</td>
                             <td>{{ $employee->department }}</td>
                             <td>{{ $employee->jobposition }}</td>
-                            <td><span class="text-uppercase">@if($employee->employmentstatus == 'Active') Active @else Archived @endif</span></td>
-                            <td class="text-end">
+                            <td><span class="text-uppercase">@if($employee->employmentstatus == 'Active') פעיל @else ארכיון @endif</span></td>
+                            <td class="text-end text-center">
+                                @if(0)
                                 <a href="{{ url('/admin/employee/view') }}/{{ $employee->reference }}" class="btn btn-outline-secondary btn-sm btn-rounded"><i class="fas fa-file-alt"></i></a>
+                                @endif
 
                                 <a href="{{ url('/admin/employee/edit') }}/{{ $employee->reference }}" class="btn btn-outline-secondary btn-sm btn-rounded"><i class="fas fa-pen"></i></a>
 

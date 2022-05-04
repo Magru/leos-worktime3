@@ -63,14 +63,12 @@ class DashboardController extends Controller
             foreach ($_departments as $_d){
                 $dep_emp = table::dep_employees($_d->department)->pluck('id')->toArray();
 
-                //dd($dep_emp);
 
                 $dep_people_in_today = table::attendance()->
                     where('date', $datenow)->
                     where('reference', $dep_emp)->
                     where('timeout', null)->
                     count();
-
 
                 $dep_item = [
                     'title' => $_d->department,
