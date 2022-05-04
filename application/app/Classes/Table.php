@@ -25,6 +25,11 @@ Class Table {
       return $companydata;
     }
 
+    public static function dep_employees($dep){
+        return DB::table('company_data')->where('department', $dep);
+    }
+
+
     public static function attendance() 
     {
       $attendance = DB::table('people_attendance');

@@ -121,6 +121,31 @@
 
         <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="card mb-3">
+                <div class="card-header">{{ __("Department") }}</div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ __('Name') }}</th>
+                            <th>בעבודה</th>
+                            <th>סה״כ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @if($departments)
+                                @foreach($departments as $_d)
+                                    <tr>
+                                        <th class="text-center">{{ $_d['title'] }}</th>
+                                        <th class="text-center">{{ $_d['online'] }}</th>
+                                        <th class="text-center">{{ $_d['count'] }}</th>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card mb-3">
                 <div class="card-header">{{ __("Recent Attendances") }}</div>
                 <div class="card-body">
                     <table class="table table-striped">

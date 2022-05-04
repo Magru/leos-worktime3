@@ -56,6 +56,33 @@ class DashboardController extends Controller
 
         $employee_leaves_count = table::leaves()->where('status', 'Approved')->orWhere('status', 'Pending')->count();
 
+        $_departments = table::department()->get();
+        $dep_data = [];
+
+        if($_departments){
+            foreach ($_departments as $_d){
+                $dep_emp = table::dep_employees($_d->department)->pluck('id')->toArray();
+
+                //dd($dep_emp);
+
+                $dep_people_in_today = table::attendance()->
+                    where('date', $datenow)->
+                    where('reference', $dep_emp)->
+                    where('timeout', null)->
+                    count();
+
+
+                $dep_item = [
+                    'title' => $_d->department,
+                    'count' => count($dep_emp),
+                    'online' => $dep_people_in_today
+                ];
+
+                $dep_data[] = $dep_item;
+            }
+        }
+
+
         return view('admin.dashboard', [
             'time_format' => $time_format,
             'employee_regular' => $employee_regular,
@@ -69,6 +96,7 @@ class DashboardController extends Controller
             'recent_attendance' => $recent_attendance,
             'is_offline_now' => $is_offline_now,
             'is_online_now' => $is_online_now,
+            'departments' => $dep_data
         ]);
     }
 
