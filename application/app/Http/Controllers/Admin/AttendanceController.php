@@ -38,16 +38,21 @@ class AttendanceController extends Controller
             $attendance = table::attendanceByPersonAndDate($request->emp_id, $request->start, $request->end)
                 ->orderBy('date', 'desc')->get();
         }
-
-
         $time_format = table::settings()->value("time_format");
-
         $employee = table::people()->get();
+
+        $hours_to_calculate_sum = $attendance->where('realhours', '>', 0.5)->sum('realhours');
+        $hours_to_calculate_count = $attendance->where('realhours', '>', 0.5)->count();
+
+
+        $hours_sum_net = $hours_to_calculate_sum - ($hours_to_calculate_count * 0.5);
+
 
         return view('admin.attendance', [
             'attendance' => $attendance,
             'time_format' => $time_format,
             'hours_sum' => $attendance->sum('realhours'),
+            'hours_sum_net' => $hours_sum_net,
             'employee' => $employee
         ]);
     }

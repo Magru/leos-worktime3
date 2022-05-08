@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('meta')
-    <title>Attendance | Workday Time Clock</title>
+    <title>נוכחות | LEOS</title>
     <meta name="description" content="Workday Attendance">
 @endsection
 
@@ -176,6 +176,9 @@
                         <th>{{ __('Clock Out') }}</th>
                         <th>@isset($hours_sum)
                                 {{ @$hours_sum  }}
+                            @endisset</th>
+                        <th>@isset($hours_sum_net)
+                                {{ @$hours_sum_net  }}
                             @endisset</th>
                         <th>{{ __('Status') }} ({{ __("In") }}/{{ __("Out") }})</th>
                         <th>{{ __('Actions') }}</th>
