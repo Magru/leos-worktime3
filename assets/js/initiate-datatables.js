@@ -14,6 +14,13 @@
         pageLength: 15,
         lengthChange: false,
         searching: false,
-        ordering: true
+        ordering: true,
+        "language": {
+            "search": "חיפוש",
+            "paginate": {
+                "previous": "קודם",
+                "next" : 'הבא'
+            }
+        }
     });
 })();

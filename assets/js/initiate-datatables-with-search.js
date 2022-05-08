@@ -16,7 +16,11 @@
         searching: true,
         ordering: true,
         "language": {
-            "search": "חיפוש"
+            "search": "חיפוש",
+            "paginate": {
+                "previous": "קודם",
+                "next" : 'הבא'
+            }
         }
     });
 })();

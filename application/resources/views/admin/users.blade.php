@@ -34,8 +34,8 @@
                     </h2>
                 </div>
 
-                <div class="col-md-6 mb-1 text-end">
-                    <a href="{{ url('admin/user/roles') }}" class="btn btn-outline-success btn-sm me-2">
+                <div class="col-md-6 mb-1 d-flex justify-content-end align-items-center">
+                    <a href="{{ url('admin/user/roles') }}" class="btn btn-outline-success btn-sm mx-2">
                         <i class="fas fa-users"></i><span class="button-with-icon">{{ __("Roles") }}</span>
                     </a>
                     <a href="{{ url('admin/users/add') }}" class="btn btn-outline-primary btn-sm">
@@ -66,12 +66,12 @@
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->email }}</td>
                         <td>{{ $data->role_name }}</td>
-                        <td> @if($data->acc_type == 2) Admin @else Employee @endif </td>
+                        <td> @if($data->acc_type == 2) מנהל @else עובד @endif </td>
                         <td>
                             @if($data->status == '1') 
-                                Enabled
+                                פעיל
                             @else
-                                Disabled
+                                לא פעיל
                             @endif
                         </td>
                         <td class="text-end">

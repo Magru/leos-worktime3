@@ -71,37 +71,37 @@
                     <label for="restdays" class="form-label">{{ __('Choose Rest Days') }}</label>
 
                     <div class="form-check">
-                      <input type="checkbox" name="restday[]" value="Sunday" class="form-check-input" id="customCheck1" @isset($restdays) @if(in_array("Sunday", $restdays) == true) checked @endif @endisset>
+                      <input type="checkbox" name="restday[]" value="{{ __("Sunday") }}" class="form-check-input" id="customCheck1" @isset($restdays) @if(in_array("Sunday", $restdays) == true) checked @endif @endisset>
                       <label class="form-check-label" for="customCheck1">{{ __("Sunday") }}</label>
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" name="restday[]" value="Monday" class="form-check-input" id="customCheck2" @isset($restdays) @if(in_array("Monday", $restdays) == true) checked @endif @endisset>
+                      <input type="checkbox" name="restday[]" value="{{ __("Monday") }}" class="form-check-input" id="customCheck2" @isset($restdays) @if(in_array("Monday", $restdays) == true) checked @endif @endisset>
                       <label class="form-check-label" for="customCheck2">{{ __("Monday") }}</label>
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" name="restday[]" value="Tuesday" class="form-check-input" id="customCheck3" @isset($restdays) @if(in_array("Tuesday", $restdays) == true) checked @endif @endisset>
+                      <input type="checkbox" name="restday[]" value="{{ __("Tuesday") }}" class="form-check-input" id="customCheck3" @isset($restdays) @if(in_array("Tuesday", $restdays) == true) checked @endif @endisset>
                       <label class="form-check-label" for="customCheck3">{{ __("Tuesday") }}</label>
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" name="restday[]" value="Wednesday" class="form-check-input" id="customCheck4" @isset($restdays) @if(in_array("Wednesday", $restdays) == true) checked @endif @endisset>
+                      <input type="checkbox" name="restday[]" value="{{ __("Wednesday") }}" class="form-check-input" id="customCheck4" @isset($restdays) @if(in_array("Wednesday", $restdays) == true) checked @endif @endisset>
                       <label class="form-check-label" for="customCheck4">{{ __("Wednesday") }}</label>
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" name="restday[]" value="Thursday" class="form-check-input" id="customCheck5" @isset($restdays) @if(in_array("Thursday", $restdays) == true) checked @endif @endisset>
+                      <input type="checkbox" name="restday[]" value="{{ __("Thursday") }}" class="form-check-input" id="customCheck5" @isset($restdays) @if(in_array("Thursday", $restdays) == true) checked @endif @endisset>
                       <label class="form-check-label" for="customCheck5">{{ __("Thursday") }}</label>
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" name="restday[]" value="Friday" class="form-check-input" id="customCheck6" @isset($restdays) @if(in_array("Friday", $restdays) == true) checked @endif @endisset>
+                      <input type="checkbox" name="restday[]" value="{{ __("Friday") }}" class="form-check-input" id="customCheck6" @isset($restdays) @if(in_array("Friday", $restdays) == true) checked @endif @endisset>
                       <label class="form-check-label" for="customCheck6">{{ __("Friday") }}</label>
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" name="restday[]" value="Saturday" class="form-check-input" id="customCheck7" @isset($restdays) @if(in_array("Saturday", $restdays) == true) checked @endif @endisset>
+                      <input type="checkbox" name="restday[]" value="{{ __("Saturday") }}" class="form-check-input" id="customCheck7" @isset($restdays) @if(in_array("Saturday", $restdays) == true) checked @endif @endisset>
                       <label class="form-check-label" for="customCheck7">{{ __("Saturday") }}</label>
                     </div>
                 </div>

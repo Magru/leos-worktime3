@@ -113,8 +113,8 @@
                             </td>
                             <td>{{ $data->hours }} hr</td>
                             <td>{{ $data->restday }}</td>
-                            <td>@php echo e(date('M d, Y', strtotime($data->datefrom))) @endphp</td>
-                            <td>@php echo e(date('M d, Y', strtotime($data->dateto))) @endphp</td>
+                            <td>@php echo e(date('d/m/Y', strtotime($data->datefrom))) @endphp</td>
+                            <td>@php echo e(date('d/m/Y', strtotime($data->dateto))) @endphp</td>
                             <td>
                                 @if($data->archive == '0') 
                                     <span class="green">{{ __('Active') }}</span>
