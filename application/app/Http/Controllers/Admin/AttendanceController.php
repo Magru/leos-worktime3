@@ -22,13 +22,23 @@ use App\Http\Controllers\Controller;
 class AttendanceController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         if (permission::permitted('attendance') == 'fail') {
             return redirect()->route('denied');
         }
 
-        $attendance = table::attendance()->orderBy('date', 'desc')->take(250)->get();
+        if ($request->emp_id) {
+            $attendance = table::attendanceByPerson($request->emp_id)->orderBy('date', 'desc')->get();
+        } else {
+            $attendance = table::attendance()->orderBy('date', 'desc')->take(250)->get();
+        }
+
+        if ($request->start && $request->end && $request->emp_id) {
+            $attendance = table::attendanceByPersonAndDate($request->emp_id, $request->start, $request->end)
+                ->orderBy('date', 'desc')->get();
+        }
+
 
         $time_format = table::settings()->value("time_format");
 

@@ -43,7 +43,7 @@
                     <div class="col-md-6">
                     <form action="{{ url('admin/settings/update') }}" method="post" class="needs-validation" novalidate autocomplete="off" accept-charset="utf-8">
                         @csrf
-                        <p class="mb-0 text-uppercase">{{ __("Localization") }}</p>
+                        <p class="mb-0 text-uppercase"</p>
                         <hr class="mt-0">
 
                         <div class="mb-3">

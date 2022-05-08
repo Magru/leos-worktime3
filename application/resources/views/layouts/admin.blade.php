@@ -69,11 +69,13 @@
                         <i class="text-secondary fas fa-user-circle"></i><span class="text-with-icon text-uppercase">{{ __("Users") }}</span>
                     </a>
                 </li>
+                @if(0)
                 <li>
                     <a class="nav-link" href="{{ url('/admin/settings') }}">
                         <i class="text-secondary fas fa-cog"></i><span class="text-with-icon text-uppercase">{{ __("Settings") }}</span>
                     </a>
                 </li>
+                @endif;
             </ul>
         </nav>
         <!-- end of sidebar component -->

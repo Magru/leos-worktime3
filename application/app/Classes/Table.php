@@ -7,105 +7,120 @@
 * Author: Brian Luna
 * Copyright 2022 Codefactor
 */
+
 namespace App\Classes;
 
 use DB;
 
-Class Table {
+class Table
+{
 
-    public static function people() 
+    public static function people()
     {
-      $people = DB::table('people');
-      return $people;
+        $people = DB::table('people');
+        return $people;
     }
 
-    public static function companydata() 
+    public static function companydata()
     {
-      $companydata = DB::table('company_data');
-      return $companydata;
+        $companydata = DB::table('company_data');
+        return $companydata;
     }
 
-    public static function dep_employees($dep){
+    public static function dep_employees($dep)
+    {
         return DB::table('company_data')->where('department', $dep);
     }
 
 
-    public static function attendance() 
+    public static function attendance()
     {
-      $attendance = DB::table('people_attendance');
-      return $attendance;
+        $attendance = DB::table('people_attendance');
+        return $attendance;
     }
 
-    public static function leaves() 
+    public static function attendanceByPerson($emp_id)
     {
-      $leaves = DB::table('people_leaves');
-      return $leaves;
+        $attendance = DB::table('people_attendance')->where('reference', $emp_id);
+        return $attendance;
     }
 
-    public static function schedules() 
+    public static function attendanceByPersonAndDate($emp_id, $start, $end)
     {
-      $schedules = DB::table('people_schedules');
-      return $schedules;
+        return DB::table('people_attendance')->where('reference', $emp_id)
+            ->whereBetween('date', [date($start), date($end)]);
     }
 
-    public static function reportviews() 
+    public static function leaves()
     {
-      $reportviews = DB::table('report_views');
-      return $reportviews;
+        $leaves = DB::table('people_leaves');
+        return $leaves;
     }
 
-    public static function permissions() 
+    public static function schedules()
     {
-      $permissions = DB::table('users_permissions');
-      return $permissions;
+        $schedules = DB::table('people_schedules');
+        return $schedules;
     }
 
-    public static function roles() 
+    public static function reportviews()
     {
-      $roles = DB::table('users_roles');
-      return $roles;
+        $reportviews = DB::table('report_views');
+        return $reportviews;
     }
 
-    public static function users() 
+    public static function permissions()
     {
-      $users = DB::table('users')->select('id', 'reference', 'idno', 'name', 'email', 'role_id', 'acc_type', 'status');
-      return $users;
+        $permissions = DB::table('users_permissions');
+        return $permissions;
     }
 
-    public static function company() 
+    public static function roles()
     {
-      $company = DB::table('form_company');
-      return $company;
+        $roles = DB::table('users_roles');
+        return $roles;
     }
 
-    public static function department() 
+    public static function users()
     {
-      $department = DB::table('form_department');
-      return $department;
+        $users = DB::table('users')->select('id', 'reference', 'idno', 'name', 'email', 'role_id', 'acc_type', 'status');
+        return $users;
     }
 
-    public static function jobtitle() 
+    public static function company()
     {
-      $jobtitle = DB::table('form_jobtitle');
-      return $jobtitle;
+        $company = DB::table('form_company');
+        return $company;
     }
 
-    public static function leavetypes() 
+    public static function department()
     {
-      $leavetypes = DB::table('form_leavetype');
-      return $leavetypes;
+        $department = DB::table('form_department');
+        return $department;
     }
 
-    public static function leavegroup() 
+    public static function jobtitle()
     {
-      $leavegroup = DB::table('form_leavegroup');
-      return $leavegroup;
+        $jobtitle = DB::table('form_jobtitle');
+        return $jobtitle;
     }
 
-    public static function settings() 
+    public static function leavetypes()
     {
-      $settings = DB::table('settings');
-      return $settings;
+        $leavetypes = DB::table('form_leavetype');
+        return $leavetypes;
+    }
+
+    public static function leavegroup()
+    {
+        $leavegroup = DB::table('form_leavegroup');
+        return $leavegroup;
+    }
+
+    public static function settings()
+    {
+        $settings = DB::table('settings');
+        return $settings;
     }
 
 }

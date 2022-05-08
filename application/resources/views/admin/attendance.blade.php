@@ -59,7 +59,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ url('admin/attendance') }}" method="post"
+                <form action="{{ url('admin/attendance') }}" method="get"
                       class="form-inline responsive-filter-form needs-validation mb-2" novalidate autocomplete="off"
                       accept-charset="utf-8">
                     @csrf
@@ -79,12 +79,12 @@
 
                             <div class="col-sm-2">
                                 <input name="start" type="text" class="airdatepicker form-control form-control-sm mr-1"
-                                       value="" placeholder="מ-" required>
+                                       value="" placeholder="מ-" >
                             </div>
 
                             <div class="col-sm-2 position-relative">
                                 <input name="end" type="text" class="airdatepicker form-control form-control-sm mr-1"
-                                       value="" placeholder="עד-" required>
+                                       value="" placeholder="עד-" >
                             </div>
 
                             <div class="col-sm-2">
@@ -113,7 +113,8 @@
                         <th>{{ __('Employee') }}</th>
                         <th>{{ __('Clock In') }}</th>
                         <th>{{ __('Clock Out') }}</th>
-                        <th>{{ __('Total Hours') }}</th>
+                        <th>שעות ברוטו</th>
+                        <th>שעות נטו</th>
                         <th>{{ __('Status') }} ({{ __("In") }}/{{ __("Out") }})</th>
                         <th>{{ __('Actions') }}</th>
                     </tr>
@@ -145,6 +146,7 @@
                                     @endisset
                                 </td>
                                 <td>{{ $data->realhours }}</td>
+                                <td>{{ $data->realhours > 0.5 ? $data->realhours - 0.5 : 0 }}</td>
                                 <td>
                                     @if($data->status_timein !== null && $data->status_timeout !== null)
                                         <span class="@if($data->status_timein == 'Late In') text-warning @else text-primary @endif">{{ $data->status_timein }}</span>

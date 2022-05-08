@@ -9,6 +9,6 @@
 (function() {
     'use strict';
 
-    $('.airdatepicker').datepicker({ language: 'he', dateFormat: 'dd-mm-yyyy' });
+    $('.airdatepicker').datepicker({ language: 'he', dateFormat: 'yyyy-mm-dd' });
     
 })();
