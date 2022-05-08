@@ -95,21 +95,37 @@
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="card mb-3">
-                <div class="card-header">{{ __("Newest Employees") }}</div>
+                <div class="card-header">נוכחות היום
+                    <span class="badge badge-secondary" style="background-color: #6c757d;">{{ date('d/m/y') }}</span>
+                </div>
                 <div class="card-body">
                     <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>{{ __('Name') }}</th>
-                            <th>{{ __('Start Date') }}</th>
+                            <th>כניסה</th>
+                            <th>יציאה</th>
                         </tr>
                     </thead>
                     <tbody>
                         @isset($recent_employees)
                             @foreach ($recent_employees as $data)
-                            <tr>
-                                <td>{{ $data->lastname }}, {{ $data->firstname }}</td>
-                                <td>@php echo e(date('M d, Y', strtotime($data->startdate))) @endphp</td>
+                            <tr class="{{ !$data['in'] ? 'red-cell emp-out' : '' }}">
+                                <td>{{ $data['name'] }}</td>
+                                <td>
+                                    @if($data['in'])
+                                        <i class="fa-solid fa-circle-check" style="color: green"></i>
+                                    @else
+                                        <i class="fa-solid fa-ban" style="color: red"></i>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($data['out'])
+                                        <i class="fa-solid fa-circle-check" style="color: green"></i>
+                                    @else
+                                        <i class="fa-solid fa-ban" style="color: red"></i>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         @endisset

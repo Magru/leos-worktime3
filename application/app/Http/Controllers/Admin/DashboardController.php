@@ -38,7 +38,26 @@ class DashboardController extends Controller
 
         $time_format = table::settings()->value("time_format");
         
-        $recent_employees = table::people()->join('company_data', 'people.id', '=', 'company_data.reference')->where('people.employmentstatus', 'Active')->orderBy('company_data.startdate', 'desc')->take(8)->get();
+        $all_employees = table::people()->get();
+        $recent_employees = [];
+        if($all_employees){
+            foreach ($all_employees as $_e){
+                $att_today = table::attendance()
+                    ->where([
+                        ['date', '=' , date('Y-m-d')],
+                        ['reference', '=' , $_e->id],
+                    ])->orderBy('created_at', 'desc')->first();
+
+
+                $recent_employees[] = [
+                    'name' => $_e->lastname . ', ' .  $_e->firstname,
+                    'in' => $att_today ? $att_today->timein : null,
+                    'out' => $att_today ? $att_today->timeout : null,
+                ];
+            }
+        }
+
+
 
         $employee_regular = table::people()->where('employmenttype', 'Regular')->where('employmentstatus', 'Active')->count();
 

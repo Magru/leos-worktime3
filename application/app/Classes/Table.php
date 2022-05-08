@@ -21,6 +21,7 @@ class Table
         return $people;
     }
 
+
     public static function companydata()
     {
         $companydata = DB::table('company_data');
