@@ -66,33 +66,8 @@
                     <i class="text-secondary fas fa-bars"></i>
                 </button>
 
-                <div class="collapse navbar-collapse" id="topnavmenu">
-                    <ul class="navbar-nav ms-auto main-nav-top navmenu">
-                        <li class="nav-item dropdown">
-                            <div class="nav-dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="nav1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="text-secondary fas fa-globe"></i><span class="text-with-icon text-responsive text-uppercase">{{ env('APP_LOCALE', 'en') }}</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end nav-link-menu" aria-labelledby="nav1">
-                                    <ul class="nav-list">
-                                        <li><a href="{{ url('lang/en') }}" class="dropdown-item"><i class="flag-icon flag-icon-us mr-2"></i> English</a></li>
-                                        <li><a href="{{ url('lang/es') }}" class="dropdown-item"><i class="flag-icon flag-icon-es mr-2"></i> Español</a></li>
-                                        <li><a href="{{ url('lang/fr') }}" class="dropdown-item"><i class="flag-icon flag-icon-fr mr-2"></i> Français</a></li>
-                                        <li><a href="{{ url('lang/de') }}" class="dropdown-item"><i class="flag-icon flag-icon-de mr-2"></i> Deutsch</a></li>
-                                        <li><a href="{{ url('lang/it') }}" class="dropdown-item"><i class="flag-icon flag-icon-it mr-2"></i> Italian</a></li>
-                                        <li><a href="{{ url('lang/ru') }}" class="dropdown-item"><i class="flag-icon flag-icon-ru mr-2"></i> Russian</a></li>
-                                        <li><a href="{{ url('lang/pt') }}" class="dropdown-item"><i class="flag-icon flag-icon-pt mr-2"></i> Português</a></li>
-                                        <li><a href="{{ url('lang/nl') }}" class="dropdown-item"><i class="flag-icon flag-icon-nl mr-2"></i> Dutch</a></li>
-                                        <li><a href="{{ url('lang/in') }}" class="dropdown-item"><i class="flag-icon flag-icon-in mr-2"></i> Hindi</a></li>
-                                        <li><a href="{{ url('lang/jp') }}" class="dropdown-item"><i class="flag-icon flag-icon-jp mr-2"></i> 日本語</a></li>
-                                        <li><a href="{{ url('lang/my') }}" class="dropdown-item"><i class="flag-icon flag-icon-my mr-2"></i> Malay</a></li>
-                                        <li><a href="{{ url('lang/ph') }}" class="dropdown-item"><i class="flag-icon flag-icon-ph mr-2"></i> Filipino</a></li>
-                                        <li><a href="{{ url('lang/tr') }}" class="dropdown-item"><i class="flag-icon flag-icon-tr mr-2"></i> Turkish</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
+                <div class="collapse navbar-collapse d-flex justify-content-end" id="topnavmenu">
+                    <ul class="navbar-nav main-nav-top navmenu">
                         <li class="nav-item dropdown">
                             <div class="nav-dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="nav2" role="button" data-bs-toggle="dropdown" aria-expanded="false">

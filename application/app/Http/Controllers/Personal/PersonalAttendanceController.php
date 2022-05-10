@@ -22,7 +22,8 @@ class PersonalAttendanceController extends Controller
     {
         $idno = \Auth::user()->idno;
 
-        $data = table::attendance()->where('idno', $idno)->limit(250)->get();
+        $data = table::attendance()->where('idno', $idno)->limit(700)->get();
+
 
         $time_format = table::settings()->value("time_format");
 

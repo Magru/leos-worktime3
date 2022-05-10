@@ -17,7 +17,7 @@
                     </h2>
                 </div>
 
-                <div class="col-md-6 mb-1 text-end">
+                <div class="col-md-6 mb-1 d-flex align-items-center justify-content-end">
                     <a href="{{ url('/admin/users') }}" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-arrow-left"></i><span class="button-with-icon">{{ __("Return") }}</span>
                     </a>
@@ -57,7 +57,7 @@
                 <div class="mb-3">
                   <label for="role_id" class="form-label">{{ __("Role") }}</label>
                   <select name="role_id" class="form-select" required>
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     @isset($roles)
                         @foreach ($roles as $role)
                             <option value="{{ $role->id }}" @if($role->id == $user->role_id) selected @endif>{{ $role->role_name }}</option>
@@ -70,8 +70,8 @@
                   <label for="status" class="form-label">{{ __("Status") }}</label>
                   <select name="status" class="form-select text-uppercase" required>
                     <option value="" disabled selected>Choose...</option>
-                    <option value="1" @isset($user->status) @if($user->status == 1) selected @endif @endisset>{{ __("Enabled") }}</option>
-                    <option value="0" @isset($user->status) @if($user->status == 0) selected @endif @endisset>{{ __("Disabled") }}</option>
+                    <option value="1" @isset($user->status) @if($user->status == 1) selected @endif @endisset>פעיל</option>
+                    <option value="0" @isset($user->status) @if($user->status == 0) selected @endif @endisset>לא פעיל</option>
                   </select>
                 </div>
 

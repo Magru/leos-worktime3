@@ -506,7 +506,8 @@ table.dataTable>tbody>tr.child ul.dtr-details {
 .form-check .form-check-input{
     margin-left: 10px;
 }
-.small-dropdown .dropdown-menu{
+.small-dropdown .dropdown-menu,
+.nav-dropdown .dropdown-menu{
     left: 0;
     right: auto;
 }

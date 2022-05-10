@@ -128,7 +128,7 @@
                     // insert new
                     $('#type').text(type(response['type']));
                     $('#employee').text(response['employee']);
-                    $('#time').html('<span class="fw-bolder">' + response['time'] + '</span>' + '.' + '<span> {{ __("Success!") }}</span>');
+                    $('#time').html('<span class="fw-bolder">' + response['time'] + '</span>');
 
                     toast.show();
                 }

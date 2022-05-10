@@ -140,56 +140,56 @@
                         @foreach($recent_attendance as $v)
 
                         @if($v->timein != null && $v->timeout == null)
-                        <tr>
+                        <tr class="green-cell">
                             <td>
-                                @php echo e(date('M d, Y', strtotime($v->date))); @endphp
+                                @php  echo e(date('d/m/Y', strtotime($v->date))); @endphp
                             </td>
                             <td>
                                 @php
                                     if($time_format == 12) {
-                                        echo e(date("h:i:s A", strtotime($v->timein)));
+                                        echo e(date("h:i A", strtotime($v->timein)));
                                     } else {
-                                        echo e(date("H:i:s", strtotime($v->timein)));
+                                        echo e(date("H:i", strtotime($v->timein)));
                                     }
                                 @endphp
                             </td>
-                            <td>Clock-In</td>
+                            <td>כניסה</td>
                         </tr>
                         @endif
                         
                         @if($v->timein != null && $v->timeout != null)
-                        <tr>
+                        <tr class="red-cell">
                             <td>
-                                @php echo e(date('M d, Y', strtotime($v->date))); @endphp
+                                @php echo e(date('d/m/Y', strtotime($v->date))); @endphp
                             </td>
                             <td>
                                 @php
                                     if($time_format == 12) {
                                         echo e(date("h:i:s A", strtotime($v->timeout)));
                                     } else {
-                                        echo e(date("H:i:s", strtotime($v->timeout)));
+                                        echo e(date("H:i", strtotime($v->timeout)));
                                     }
                                 @endphp
                             </td>
-                            <td>Clock-Out</td>
+                            <td>יציאה</td>
                         </tr>
                         @endif
 
                         @if($v->timein != null && $v->timeout != null)
-                        <tr>
+                        <tr class="green-cell">
                             <td>
-                                @php echo e(date('M d, Y', strtotime($v->date))); @endphp
+                                @php echo e(date('d/m/Y', strtotime($v->date))); @endphp
                             </td>
                             <td>
                                 @php
                                     if($time_format == 12) {
                                         echo e(date("h:i:s A", strtotime($v->timein)));
                                     } else {
-                                        echo e(date("H:i:s", strtotime($v->timein)));
+                                        echo e(date("H:i", strtotime($v->timein)));
                                     }
                                 @endphp
                             </td>
-                            <td>Clock-In</td>
+                            <td>כניסה</td>
                         </tr>
                         @endif
 

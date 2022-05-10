@@ -21,7 +21,7 @@
                     </h2>
                 </div>
 
-                <div class="col-md-6 mb-1 text-end">
+                <div class="col-md-6 mb-1 d-flex justify-content-end align-items-center">
                     <a href="{{ url('/webclock') }}" class="btn btn-outline-primary btn-sm" target="_blank">
                         <i class="fas fa-clock"></i><span class="button-with-icon">{{ __("Web Clock") }}</span>
                     </a>
@@ -37,11 +37,11 @@
                 <div class="col-md-12">
                   <div class="row g-1">
                       <div class="col-sm-2">
-                        <input name="start" type="text" class="airdatepicker form-control form-control-sm mr-1" value="" placeholder="{{ __('Start Date') }}" required>
+                        <input name="start" type="text" class="airdatepicker form-control form-control-sm mr-1" value="" placeholder="מ-" required>
                       </div>
 
                       <div class="col-sm-2">
-                        <input name="end" type="text" class="airdatepicker form-control form-control-sm mr-1" value="" placeholder="{{ __('End Date') }}" required>
+                        <input name="end" type="text" class="airdatepicker form-control form-control-sm mr-1" value="" placeholder="עד-" required>
                       </div>
 
                       <div class="col-sm-2">
@@ -67,7 +67,7 @@
                     @isset($attendance)
                         @foreach($attendance as $data)
                             <tr>
-                                <td>{{ $data->date }}</td>
+                                <td>{{ date('d/m/Y', strtotime($data->date)) }}</td>
                                 <td>
                                     @php
                                         if($data->timein !== null) {
