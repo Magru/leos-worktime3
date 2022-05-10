@@ -57,6 +57,14 @@
             </div>
         </div>
 
+        @if($show_nav)
+            <div class="col-12 my-2 d-flex justify-content-center">
+                <a href="{{ route('emp-attendance', ['emp_id' => $emp_id, 'start' => date('Y-m-01'), 'end' => date('Y-m-t'), 'month']) }}" type="button" class="btn btn-secondary m-1">הצג חודש נוכחי</a>
+                <a href="" type="button" class="btn btn-secondary m-1">הצד חודש קודם</a>
+                <a href="" type="button" class="btn btn-secondary m-1">Right</a>
+            </div>
+        @endif
+
         <div class="card">
             <div class="card-body">
                 <form action="{{ url('admin/attendance') }}" method="get"
@@ -115,6 +123,8 @@
                         <th>{{ __('Clock Out') }}</th>
                         <th>שעות ברוטו</th>
                         <th>שעות נטו</th>
+                        <th>125%</th>
+                        <th>150%</th>
                         <th>{{ __('Status') }} ({{ __("In") }}/{{ __("Out") }})</th>
                         <th>{{ __('Actions') }}</th>
                     </tr>
@@ -147,6 +157,8 @@
                                 </td>
                                 <td>{{ $data->realhours }}</td>
                                 <td>{{ $data->realhours > 0.5 ? $data->realhours - 0.5 : 0 }}</td>
+                                <td>{{ $data->h_125 }}</td>
+                                <td>{{ $data->h_150 }}</td>
                                 <td>
                                     @if($data->status_timein !== null && $data->status_timeout !== null)
                                         <span class="@if($data->status_timein == 'Late In') text-warning @else text-primary @endif">{{ $data->status_timein }}</span>

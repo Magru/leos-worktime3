@@ -95,7 +95,7 @@ Route::middleware(['auth'])->group(function () {
             |--------------------------------------------------------------------------
             */
             Route::get('admin/attendance', [AttendanceController::class, 'index'])->name('admin-attendance');
-            Route::post('admin/attendance', [AttendanceController::class, 'filter']);
+            Route::post('admin/attendance', [AttendanceController::class, 'filter'])->name('emp-attendance');
             Route::get('admin/attendance/manual-entry', [AttendanceController::class, 'add']);
             Route::post('admin/attendance/add-entry', [AttendanceController::class, 'entry']);
             Route::get('admin/attendance/delete/{id}', [AttendanceController::class, 'delete']);

@@ -28,10 +28,14 @@ class AttendanceController extends Controller
             return redirect()->route('denied');
         }
 
+        $show_nav = false;
         if ($request->emp_id) {
             $attendance = table::attendanceByPerson($request->emp_id)->orderBy('date', 'desc')->get();
+            $emp_id = $request->emp_id;
+            $show_nav = true;
         } else {
-            $attendance = table::attendance()->orderBy('date', 'desc')->take(250)->get();
+            $attendance = table::attendance()->orderBy('date', 'desc')->take(700)->get();
+            $emp_id = null;
         }
 
         if ($request->start && $request->end && $request->emp_id) {
@@ -53,7 +57,9 @@ class AttendanceController extends Controller
             'time_format' => $time_format,
             'hours_sum' => $attendance->sum('realhours'),
             'hours_sum_net' => $hours_sum_net,
-            'employee' => $employee
+            'employee' => $employee,
+            'emp_id' => $emp_id,
+            'show_nav' => $show_nav
         ]);
     }
 

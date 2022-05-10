@@ -233,13 +233,27 @@ class ClockController extends Controller
                 $th = $time1->diffInHours($time2);
                 $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
                 $realhours = $time1->floatDiffInRealHours($time2);
+                $realhours_netto = $realhours > 0.5 ? $realhours - 0.5 : 0;
+                $h_125 = 0;
+                $h_150 = 0;
+
+                if($realhours_netto >= 10.4){
+                    $h_125 = 2;
+                    $h_150 = $realhours_netto - 10.4;
+                }elseif($realhours_netto < 10.4 && $realhours_netto > 8.4){
+                    $h_125 = $realhours_netto - 8.4;
+                }
+
                 $totalhour = $th.".".$tm;
 
                 table::attendance()->where([['idno', $idno],['date', $clockInDate], ['timeout', null]])->update(array(
                     'timeout' => $timeOUT,
                     'totalhours' => $totalhour,
                     'realhours' => $realhours,
-                    'status_timeout' => $status_out)
+                    'status_timeout' => $status_out,
+                    'real_hours_netto' => $realhours_netto,
+                    'h_125' => $h_125,
+                    'h_150' => $h_150),
                 );
                 
                 return response()->json([

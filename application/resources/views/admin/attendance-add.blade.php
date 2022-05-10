@@ -24,7 +24,7 @@
                     </h2>
                 </div>
 
-                <div class="col-md-6 mb-1 text-end">
+                <div class="col-md-6 mb-1 d-flex justify-content-end align-items-center">
                     <a href="{{ url('/admin/attendance') }}" class="btn btn-outline-primary btn-sm float-end">
                         <i class="fas fa-arrow-left"></i><span class="button-with-icon">{{ __("Return") }}</span>
                     </a>
@@ -41,7 +41,7 @@
                 <div class="mb-3">
                   <label for="name" class="form-label">{{ __("Employee") }}</label>
                   <select name="name" class="form-select select-search" required>
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled selected>בחר...</option>
                     @isset($employee)
                     @foreach ($employee as $data)
                         <option value="{{ $data->lastname }}, {{ $data->firstname }}" data-reference="{{ $data->id }}">{{ $data->lastname }}, {{ $data->firstname }}</option>
@@ -61,7 +61,7 @@
                         <input type="text" name="clockin" value="" class="timepicker form-control" placeholder="00:00 AM/PM" required>
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="clockout" class="form-label">{{ __("Clock OUT") }} <small class="text-muted">({{ __("optional") }})</small></label>
+                        <label for="clockout" class="form-label">{{ __("Clock OUT") }}</label>
                         <input type="text" name="clockout" value="" class="timepicker form-control" placeholder="00:00 AM/PM">
                     </div>
                 </div>
