@@ -162,6 +162,7 @@ class ClockController extends Controller
                             'employee' => $employee,
                             'timein' => $date." ".$time,
                             'status_timein' => $status_in,
+                            'is_rest_calculated' => $person->rest_calc
                         ],
                     ]);
 
@@ -233,7 +234,13 @@ class ClockController extends Controller
                 $th = $time1->diffInHours($time2);
                 $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
                 $realhours = $time1->floatDiffInRealHours($time2);
-                $realhours_netto = $realhours > 0.5 ? $realhours - 0.5 : 0;
+
+                if($person->rest_calc){
+                    $realhours_netto = $realhours > 0.5 ? $realhours - 0.5 : 0;
+                }else{
+                    $realhours_netto = $realhours;
+                }
+
                 $h_125 = 0;
                 $h_150 = 0;
 

@@ -117,6 +117,7 @@
                        data-order='[[ 0, "desc" ]]'>
                     <thead>
                     <tr>
+                        <th>הפסקה</th>
                         <th>{{ __('Date') }}</th>
                         <th>{{ __('Employee') }}</th>
                         <th>{{ __('Clock In') }}</th>
@@ -132,7 +133,8 @@
                     <tbody>
                     @isset($attendance)
                         @foreach ($attendance as $data)
-                            <tr>
+                            <tr class="@if(!$data->is_rest_calculated) border-bottom border-warning @endif">
+                                <td>@if(!$data->is_rest_calculated) <i class="fa-solid fa-ban"></i> @endif</td>
                                 <td>{{ date('d/m/Y', strtotime($data->date)) }}</td>
                                 <td>{{ $data->employee }}</td>
                                 <td>
@@ -156,7 +158,7 @@
                                     @endisset
                                 </td>
                                 <td>{{ $data->realhours }}</td>
-                                <td>{{ $data->realhours > 0.5 ? $data->realhours - 0.5 : 0 }}</td>
+                                <td>{{ $data->real_hours_netto }}</td>
                                 <td>{{ $data->h_125 }}</td>
                                 <td>{{ $data->h_150 }}</td>
                                 <td>
