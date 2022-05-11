@@ -226,6 +226,15 @@
                                    data-position="top left">
                         </div>
                     </div>
+
+                    <div class="row g-2">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" value="1" checked id="rest_calc" name="rest_calc">
+                                <label class="form-check-label" for="rest_calc">חישוב הפסקה</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">

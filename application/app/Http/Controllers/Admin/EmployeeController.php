@@ -44,7 +44,7 @@ class EmployeeController extends Controller
 	    	'company' => $company,
 	    	'department' => $department,
 	    	'jobtitle' => $jobtitle,
-	    	'leavegroup' => $leavegroup
+	    	'leavegroup' => $leavegroup,
 	    ]);
 	}
 
@@ -99,6 +99,7 @@ class EmployeeController extends Controller
 		$employmentstatus = $request->employmentstatus;
 		$startdate = date("Y-m-d", strtotime($request->startdate));
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
+        $rest_calc = $request->rest_calc ?: 0;
 
 		$is_idno_taken = table::companydata()->where('idno', $idno)->exists();
 
@@ -139,6 +140,7 @@ class EmployeeController extends Controller
 				'employmenttype' => $employmenttype,
 				'employmentstatus' => $employmentstatus,
 				'avatar' => $name,
+                'rest_calc' => $rest_calc
             ],
     	]);
 
@@ -209,7 +211,6 @@ class EmployeeController extends Controller
 		$v = $request->validate([
 			'id' => 'required|max:200',
 			'lastname' => 'required|max:155',
-			'lastname' => 'required|max:155',
 			'firstname' => 'required|max:155',
 			'mi' => 'nullable|max:155',
 			'age' => 'nullable|digits_between:0,199|max:3',
@@ -256,8 +257,10 @@ class EmployeeController extends Controller
 		$employmentstatus = $request->employmentstatus;
 		$startdate = date("Y-m-d", strtotime($request->startdate));
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
+        $rest_calc = $request->rest_calc ?: 0;
 
-		$file = $request->file('image');
+
+        $file = $request->file('image');
 		$name = null;
 
 		if($file != null) 
@@ -288,7 +291,8 @@ class EmployeeController extends Controller
 			'employmenttype' => $employmenttype,
 			'employmentstatus' => $employmentstatus,
 			'avatar' => $name,
-    	]);
+            'rest_calc' => $rest_calc
+        ]);
 
 		table::companydata()->where('reference', $id)->update([
 			'company' => $company,

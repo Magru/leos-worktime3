@@ -76,7 +76,7 @@
                         <div class="mb-3 col-md-6">
                             <label for="civilstatus" class="form-label">{{ __("Civil Status") }}</label>
                             <select name="civilstatus" class="form-select text-uppercase">
-                                <option value="" disabled selected>Choose...</option>
+                                <option value="" disabled selected>בחר...</option>
                                 <option value="SINGLE"
                                         @isset($employee->civilstatus) @if($employee->civilstatus == 'SINGLE') selected @endif @endisset>{{ __("Single") }}</option>
                                 <option value="MARRIED"
@@ -265,6 +265,16 @@
                                    value="@isset($employee_data->dateregularized){{ $employee_data->dateregularized }}@endisset"
                                    class="airdatepicker form-control text-uppercase" placeholder="YYYY-MM-DD"
                                    data-position="top left">
+                        </div>
+                    </div>
+
+
+                    <div class="row g-2">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" value="1" @isset($employee->rest_calc) @if($employee->rest_calc) checked @endif @endisset id="rest_calc" name="rest_calc">
+                                <label class="form-check-label" for="rest_calc">חישוב הפסקה</label>
+                            </div>
                         </div>
                     </div>
 
