@@ -98,6 +98,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('admin/attendance', [AttendanceController::class, 'filter'])->name('emp-attendance');
             Route::get('admin/attendance/manual-entry', [AttendanceController::class, 'add']);
             Route::post('admin/attendance/add-entry', [AttendanceController::class, 'entry']);
+            Route::get('admin/attendance/edit-entry/{id}', [AttendanceController::class, 'edit']);
+            Route::post('admin/attendance/update-entry', [AttendanceController::class, 'update']);
             Route::get('admin/attendance/delete/{id}', [AttendanceController::class, 'delete']);
             
             /*

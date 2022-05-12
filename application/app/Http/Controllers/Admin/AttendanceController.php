@@ -296,5 +296,114 @@ class AttendanceController extends Controller
             'time_format' => $time_format
         ]);
     }
+
+    public function edit($id)
+    {
+        if (permission::permitted('attendance') == 'fail') {
+            return redirect()->route('denied');
+        }
+
+        $entry = table::attendance()->where('id', $id)->first();
+
+        $time_format = table::settings()->value("time_format");
+
+        return view('admin.attendance-edit', ['entry' => $entry, 'time_format' => $time_format]);
+    }
+
+    public function update(Request $request)
+    {
+        if (permission::permitted('attendance') == 'fail') {
+            return redirect()->route('denied');
+        }
+
+        $date = date('Y-m-d', strtotime($request->date));
+        $entry = table::attendance()->where('id', $request->entry_to_update)->first();
+        $sched_in_time = table::schedules()->where([['idno', $entry->idno], ['archive', 0]])->value('intime');
+        $sched_out_time = table::schedules()->where([['idno', $entry->idno], ['archive', 0]])->value('outime');
+
+
+        $clockin = date('h:i:s A', strtotime($request->clockin));
+        $clockout = ($request->clockout != null) ? date('h:i:s A', strtotime($request->clockout)) : null;
+
+        if ($sched_in_time == NULL) {
+            $status_in = null;
+
+        } else {
+
+            $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
+
+            $time_in_24h = date("H.i", strtotime($clockin));
+
+            if ($time_in_24h <= $sched_clock_in_time_24h) {
+                $status_in = trans("In Time");
+            } else {
+                $status_in = trans("Late In");
+            }
+        }
+
+        if ($sched_out_time == NULL) {
+            $status_out = null;
+
+        } else {
+
+            $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
+
+            $time_out_24h = date("H.i", strtotime($clockout));
+
+            if ($time_out_24h >= $sched_clock_out_time_24h) {
+                $status_out = trans("On Time");
+            } else {
+                $status_out = trans("Early Out");
+            }
+        }
+
+
+        $time1 = Carbon::createFromFormat("Y-m-d h:i:s A", $date . " " . $clockin);
+        $time2 = Carbon::createFromFormat("Y-m-d h:i:s A", $date . " " . $clockout);
+        $th = $time1->diffInHours($time2);
+        $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
+        $realhours = $time1->floatDiffInRealHours($time2);
+
+        if($entry->is_rest_calculated){
+            $realhours_netto = $realhours > 0.5 ? $realhours - 0.5 : 0;
+        }else{
+            $realhours_netto = $realhours;
+        }
+
+        $h_125 = 0;
+        $h_150 = 0;
+
+        if($realhours_netto >= 10.4){
+            $h_125 = 2;
+            $h_150 = $realhours_netto - 10.4;
+        }elseif($realhours_netto < 10.4 && $realhours_netto > 8.4){
+            $h_125 = $realhours_netto - 8.4;
+        }
+        $totalhour = $th . "." . $tm;
+
+
+        table::attendance()->where('id', $request->entry_to_update)->update(
+            [
+                'idno' => $entry->idno,
+                'reference' => $entry->reference,
+                'date' => $date,
+                'employee' => $entry->employee,
+                'timein' => $date . " " . $clockin,
+                'status_timein' => $status_in,
+                'timeout' => $date . " " . $clockout,
+                'totalhours' => $totalhour,
+                'realhours' => $realhours,
+                'status_timeout' => $status_out,
+                'real_hours_netto' => $realhours_netto,
+                'h_125' => $h_125,
+                'h_150' => $h_150,
+                'is_request_done' => 1
+            ]
+        );
+
+        return redirect()->route('admin-attendance');
+
+
+    }
 }
 
