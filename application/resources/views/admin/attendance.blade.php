@@ -118,6 +118,7 @@
                     <thead>
                     <tr>
                         <th>הפסקה</th>
+                        <th>עדכון ?</th>
                         <th>{{ __('Date') }}</th>
                         <th>{{ __('Employee') }}</th>
                         <th>{{ __('Clock In') }}</th>
@@ -135,6 +136,7 @@
                         @foreach ($attendance as $data)
                             <tr class="@if(!$data->is_rest_calculated) border-bottom border-warning @endif">
                                 <td>@if(!$data->is_rest_calculated) <i class="fa-solid fa-ban"></i> @endif</td>
+                                <td>@if($data->is_edit_requested) <i class="fa-solid fa-circle-exclamation" style="color: red;"></i> @endif</td>
                                 <td>{{ date('d/m/Y', strtotime($data->date)) }}</td>
                                 <td>{{ $data->employee }}</td>
                                 <td>

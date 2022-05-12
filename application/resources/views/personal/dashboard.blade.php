@@ -16,6 +16,13 @@
         </div>
     </div>
 
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
+
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="info-box">
@@ -156,7 +163,7 @@
                             <td>כניסה</td>
                         </tr>
                         @endif
-                        
+
                         @if($v->timein != null && $v->timeout != null)
                         <tr class="red-cell">
                             <td>
@@ -232,7 +239,7 @@
                                 @endphp
                             </td>
                             <td>
-                                @php 
+                                @php
                                     echo e(date('M d',strtotime($s->datefrom)).' - '.date('M d, Y',strtotime($s->dateto)));
                                 @endphp
                             </td>
@@ -244,7 +251,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">{{ __("Recent Leaves of Absence") }}</div>
@@ -284,7 +291,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 @endsection
 

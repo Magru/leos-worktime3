@@ -234,6 +234,8 @@ Route::middleware(['auth'])->group(function () {
 
             # attendance 
             Route::get('personal/attendance', [PersonalAttendanceController::class, 'index'])->name('personal-attendance');
+            Route::get('personal/attendance/edit-request', [PersonalAttendanceController::class, 'editRequest'])->name('edit-request');
+            Route::post('personal/attendance/edit-request', [PersonalAttendanceController::class, 'editRequestSend'])->name('edit-request-send');
             Route::post('personal/attendance', [PersonalAttendanceController::class, 'filter']);
 
             # schedule 

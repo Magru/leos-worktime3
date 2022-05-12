@@ -7,18 +7,22 @@
 * Author: Brian Luna
 * Copyright 2022 Codefactor
 */
+
 namespace App\Http\Controllers\personal;
 
+use App\Mail\AttendanceEditRequest;
 use DB;
 use App\Classes\Table;
 use App\Classes\Permission;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class PersonalAttendanceController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $idno = \Auth::user()->idno;
 
@@ -48,6 +52,42 @@ class PersonalAttendanceController extends Controller
         $data = table::attendance()->where('idno', $idno)->whereBetween('date', ["$start", "$end"])->get();
 
         return view('personal.attendance', ['attendance' => $data, 'time_format' => $time_format]);
+    }
+
+    public function editRequest(Request $request)
+    {
+        $attendance = table::attendance()->where('id', $request->attendance)->first();
+        $user = \Auth::user();
+
+        return view('personal.edits.attendance-edit', [
+            'attendance' => $attendance->id,
+            'date' => $attendance->date,
+            'in' => $attendance->timein,
+            'out' => $attendance->timeout,
+            'user' => $user
+        ]);
+    }
+
+    public function editRequestSend(Request $request)
+    {
+        $attendance = tap(table::attendance()->where('id', $request->attendance))->update([
+            'is_edit_requested' => 1
+        ])->first();
+
+        $msg = '';
+
+        Mail::to('maxf@leos.co.il')->send(new AttendanceEditRequest($attendance, $request->clockin, $request->clockout));
+
+        // check for failures
+        if (Mail::failures()) {
+            $msg = 'שגיא';
+        }else{
+            $msg = 'נשלח בהצלחה';
+        }
+
+        //return Redirect::back()->withErrors(['msg' => 'נשלח בהצלחה']);
+        return redirect()->route('personal-dashboard')->with('success', $msg);
+
     }
 }
 
