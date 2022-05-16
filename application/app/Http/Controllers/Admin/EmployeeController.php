@@ -250,7 +250,7 @@ class EmployeeController extends Controller
 		$jobtitle = mb_strtoupper($request->jobtitle);
 		$companyemail = mb_strtolower($request->companyemail);
 		$leaveprivilege = $request->leaveprivilege;
-		$idno = mb_strtoupper($request->nationalid);
+		$idno = mb_strtoupper($request->idno);
 		$employmenttype = $request->employmenttype;
 		$employmentstatus = $request->employmentstatus;
 		$startdate = date("Y-m-d", strtotime($request->startdate));

@@ -142,7 +142,7 @@
                         <div class="mb-3 col-md-6">
                             <label for="idno" class="form-label">{{ __("ID Number") }}</label>
                             <input type="text" name="idno"
-                                   value="@isset($employee_data->idno){{ $employee_data->idno }}@endisset"
+                                   value="@isset($employee->idno){{ $employee->idno }}@endisset"
                                    class="form-control text-uppercase" required>
                         </div>
                     </div>

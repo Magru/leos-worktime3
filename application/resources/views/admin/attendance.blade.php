@@ -88,7 +88,7 @@
                                     <option value="" disabled selected>{{ __('Employee') }}</option>
                                     @isset($employee)
                                         @foreach ($employee as $data)
-                                            <option value="{{ $data->nationalid }}">{{ $data->lastname }}
+                                            <option value="{{ $data->idno }}">{{ $data->lastname }}
                                                 , {{ $data->firstname }}</option>
                                         @endforeach
                                     @endisset
