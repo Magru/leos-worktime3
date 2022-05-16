@@ -518,7 +518,7 @@ table.dataTable>tbody>tr.child ul.dtr-details {
 }
 .green-cell{
     text-align: center;
-    color: #fff;
+    color: #000;
     background-color: #ADF7B6!important;
 }
 .red-cell{

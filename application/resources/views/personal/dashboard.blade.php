@@ -250,6 +250,34 @@
                 </table>
                 </div>
             </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <span>נתונים לחודש: </span>
+                    {{ \Carbon\Carbon::now()->format('m/y') }}
+                </div>
+                <div class="card-body">
+                    <h2>
+                        <span>סה״כ שעות ברוטו</span>
+                        :
+                        <strong>{{ $real_hours_sum }}</strong>
+                    </h2>
+                    <h2>
+                        <span>סה״כ שעות נטו</span>
+                        :
+                        <strong>{{ $hours_netto }}</strong>
+                    </h2>
+                    <h2>
+                        <span>125%</span>
+                        :
+                        <strong>{{ $_125 }}</strong>
+                    </h2>
+                    <h2>
+                        <span>150%</span>
+                        :
+                        <strong>{{ $_150 }}</strong>
+                    </h2>
+                </div>
+            </div>
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-4">

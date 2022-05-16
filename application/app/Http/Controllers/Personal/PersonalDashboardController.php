@@ -46,6 +46,11 @@ class PersonalDashboardController extends Controller
 
         $recent_attendance = table::attendance()->where('reference', $id)->latest('date')->take(4)->get();
 
+        $current_month_real_hours_sum = table::attendanceByPersonAndDate(\Auth::user()->idno, date('Y-m-01'), date('Y-m-t'))->sum('realhours');
+        $current_month_netto_hours_sum = table::attendanceByPersonAndDate(\Auth::user()->idno, date('Y-m-01'), date('Y-m-t'))->sum('real_hours_netto');
+        $_125 = table::attendanceByPersonAndDate(\Auth::user()->idno, date('Y-m-01'), date('Y-m-t'))->sum('h_125');
+        $_150 = table::attendanceByPersonAndDate(\Auth::user()->idno, date('Y-m-01'), date('Y-m-t'))->sum('h_150');
+
         return view('personal.dashboard', [
             'current_schedule' => $current_schedule,
             'previous_schedules' => $previous_schedules,
@@ -56,6 +61,10 @@ class PersonalDashboardController extends Controller
             'recent_attendance' => $recent_attendance,
             'attendance_late_count' => $attendance_late_count,
             'attendance_early_out_count' => $attendance_early_out_count,
+            'real_hours_sum' => $current_month_real_hours_sum,
+            'hours_netto' => $current_month_netto_hours_sum,
+            '_125' => $_125,
+            '_150' => $_150
         ]);
     }
 
