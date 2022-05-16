@@ -42,13 +42,13 @@ class Table
 
     public static function attendanceByPerson($emp_id)
     {
-        $attendance = DB::table('people_attendance')->where('reference', $emp_id);
+        $attendance = DB::table('people_attendance')->where('idno', $emp_id);
         return $attendance;
     }
 
     public static function attendanceByPersonAndDate($emp_id, $start, $end)
     {
-        return DB::table('people_attendance')->where('reference', $emp_id)
+        return DB::table('people_attendance')->where('idno', $emp_id)
             ->whereBetween('date', [date($start), date($end)]);
     }
 

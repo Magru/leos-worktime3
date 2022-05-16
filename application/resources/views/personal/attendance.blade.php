@@ -30,6 +30,24 @@
             </div>
         </div>
 
+        @if($show_nav)
+            @php
+                $now = \Carbon\Carbon::now();
+                $firstDayofPreviousMonth = \Carbon\Carbon::now()->startOfMonth()->subMonthsNoOverflow()->toDateString();
+                $lastDayofPreviousMonth = \Carbon\Carbon::now()->subMonthsNoOverflow()->endOfMonth()->toDateString();
+            @endphp
+            <div class="col-12 my-2 d-flex justify-content-center">
+                <a href="{{ route('personal-attendance', ['emp_id' => $emp_id, 'start' => date('Y-m-01'), 'end' => date('Y-m-t'), 'month']) }}" type="button" class="btn btn-outline-primary m-1">
+                    <span>הצג חודש נוכחי</span>
+                    <span>({{ $now->format('m/y') }})</span>
+                </a>
+                <a href="{{ route('personal-attendance', ['emp_id' => $emp_id, 'start' => $firstDayofPreviousMonth, 'end' => $lastDayofPreviousMonth, 'month']) }}" type="button" class="btn btn-outline-primary m-1">
+                    <span>הצד חודש קודם</span>
+                    <span>({{ \Carbon\Carbon::now()->startOfMonth()->subMonthsNoOverflow()->format('m/y') }})</span>
+                </a>
+            </div>
+        @endif
+
         <div class="card">
             <div class="card-body">
                 <form action="{{ url('personal/attendance') }}" method="post" class="needs-validation" novalidate

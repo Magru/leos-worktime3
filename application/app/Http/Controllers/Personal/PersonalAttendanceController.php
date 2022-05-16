@@ -22,16 +22,33 @@ use Illuminate\Support\Facades\Redirect;
 
 class PersonalAttendanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $idno = \Auth::user()->idno;
+        if($request->emp_id && ($idno !== $request->emp_id)){
+            abort(403);
+        }
 
-        $data = table::attendance()->where('idno', $idno)->limit(700)->get();
-
-
+        $attendance = table::attendance()->where('idno', $idno)->limit(700)->get();
         $time_format = table::settings()->value("time_format");
 
-        return view('personal.attendance', ['attendance' => $data, 'time_format' => $time_format]);
+        if ($request->start && $request->end && $request->emp_id) {
+            $attendance = table::attendanceByPersonAndDate($request->emp_id, $request->start, $request->end)
+                ->orderBy('date', 'desc')->get();
+        }
+        $hours_to_calculate_sum = $attendance->where('realhours', '>', 0.5)->sum('realhours');
+        $hours_to_calculate_count = $attendance->where('realhours', '>', 0.5)->count();
+
+        return view('personal.attendance', [
+            'attendance' => $attendance,
+            'time_format' => $time_format,
+            'hours_sum' => $attendance->sum('realhours'),
+            'hours_sum_net' => $attendance->sum('real_hours_netto'),
+            'emp_id' => $idno,
+            'show_nav' => true,
+            'h_125_sum' => $attendance->sum('h_125'),
+            'h_150_sum' => $attendance->sum('h_150'),
+        ]);
     }
 
     public function filter(Request $request)

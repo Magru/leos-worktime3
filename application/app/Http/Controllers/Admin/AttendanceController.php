@@ -56,7 +56,7 @@ class AttendanceController extends Controller
             'attendance' => $attendance,
             'time_format' => $time_format,
             'hours_sum' => $attendance->sum('realhours'),
-            'hours_sum_net' => $hours_sum_net,
+            'hours_sum_net' => $attendance->sum('real_hours_netto'),
             'employee' => $employee,
             'emp_id' => $emp_id,
             'show_nav' => $show_nav,
