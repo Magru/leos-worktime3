@@ -58,10 +58,20 @@
         </div>
 
         @if($show_nav)
+            @php
+                    $now = \Carbon\Carbon::now();
+                    $firstDayofPreviousMonth = \Carbon\Carbon::now()->startOfMonth()->subMonthsNoOverflow()->toDateString();
+                    $lastDayofPreviousMonth = \Carbon\Carbon::now()->subMonthsNoOverflow()->endOfMonth()->toDateString();
+            @endphp
             <div class="col-12 my-2 d-flex justify-content-center">
-                <a href="{{ route('emp-attendance', ['emp_id' => $emp_id, 'start' => date('Y-m-01'), 'end' => date('Y-m-t'), 'month']) }}" type="button" class="btn btn-secondary m-1">הצג חודש נוכחי</a>
-                <a href="" type="button" class="btn btn-secondary m-1">הצד חודש קודם</a>
-                <a href="" type="button" class="btn btn-secondary m-1">Right</a>
+                <a href="{{ route('emp-attendance', ['emp_id' => $emp_id, 'start' => date('Y-m-01'), 'end' => date('Y-m-t'), 'month']) }}" type="button" class="btn btn-outline-primary m-1">
+                    <span>הצג חודש נוכחי</span>
+                    <span>({{ $now->format('m/y') }})</span>
+                </a>
+                <a href="{{ route('emp-attendance', ['emp_id' => $emp_id, 'start' => $firstDayofPreviousMonth, 'end' => $lastDayofPreviousMonth, 'month']) }}" type="button" class="btn btn-outline-primary m-1">
+                    <span>הצד חודש קודם</span>
+                    <span>({{ \Carbon\Carbon::now()->startOfMonth()->subMonthsNoOverflow()->format('m/y') }})</span>
+                </a>
             </div>
         @endif
 
@@ -136,7 +146,7 @@
                         @foreach ($attendance as $data)
                             <tr class="@if(!$data->is_rest_calculated) border-bottom border-warning @endif">
                                 <td>@if(!$data->is_rest_calculated) <i class="fa-solid fa-ban"></i> @endif</td>
-                                <td>@if($data->is_edit_requested) <i class="fa-solid fa-circle-exclamation" style="color: @if($data->is_request_done) green @else red @endif;"></i> @endif</td>
+                                <td>@if($data->is_edit_requested || $data->is_request_done) <i class="fa-solid fa-circle-exclamation" style="color: @if($data->is_request_done) green @else red @endif;"></i> @endif</td>
                                 <td>{{ date('d/m/Y', strtotime($data->date)) }}</td>
                                 <td>{{ $data->employee }}</td>
                                 <td>
@@ -189,6 +199,8 @@
                     </tbody>
                     <tfoot>
                     <tr>
+                        <th>הפסקה</th>
+                        <th>עדכון ?</th>
                         <th>{{ __('Date') }}</th>
                         <th>{{ __('Employee') }}</th>
                         <th>{{ __('Clock In') }}</th>
@@ -198,6 +210,12 @@
                             @endisset</th>
                         <th>@isset($hours_sum_net)
                                 {{ @$hours_sum_net  }}
+                            @endisset</th>
+                        <th>@isset($h_125_sum)
+                                {{ @$h_125_sum  }}
+                            @endisset</th>
+                        <th>@isset($h_150_sum)
+                                {{ @$h_150_sum  }}
                             @endisset</th>
                         <th>{{ __('Status') }} ({{ __("In") }}/{{ __("Out") }})</th>
                         <th>{{ __('Actions') }}</th>

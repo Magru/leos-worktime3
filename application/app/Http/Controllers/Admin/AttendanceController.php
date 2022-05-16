@@ -59,7 +59,9 @@ class AttendanceController extends Controller
             'hours_sum_net' => $hours_sum_net,
             'employee' => $employee,
             'emp_id' => $emp_id,
-            'show_nav' => $show_nav
+            'show_nav' => $show_nav,
+            'h_125_sum' => $attendance->sum('h_125'),
+            'h_150_sum' => $attendance->sum('h_150'),
         ]);
     }
 
