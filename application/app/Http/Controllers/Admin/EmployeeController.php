@@ -219,7 +219,6 @@ class EmployeeController extends Controller
 			'civilstatus' => 'nullable|alpha|max:155',
 			'mobileno' => 'nullable|max:155',
 			'birthday' => 'nullable|date|max:155',
-			'nationalid' => 'nullable|max:155',
 			'birthplace' => 'nullable|max:255',
 			'homeaddress' => 'nullable|max:255',
 			'company' => 'nullable|max:100',
@@ -244,7 +243,6 @@ class EmployeeController extends Controller
 		$civilstatus = mb_strtoupper($request->civilstatus);
 		$mobileno = $request->mobileno;
 		$birthday = date("Y-m-d", strtotime($request->birthday));
-		$nationalid = mb_strtoupper($request->nationalid);
 		$birthplace = mb_strtoupper($request->birthplace);
 		$homeaddress = mb_strtoupper($request->homeaddress);
 		$company = mb_strtoupper($request->company);
@@ -286,7 +284,7 @@ class EmployeeController extends Controller
 			'mobileno' => $mobileno,
 			'birthday' => $birthday,
 			'birthplace' => $birthplace,
-			'nationalid' => $idno,
+			'idno' => $idno,
 			'homeaddress' => $homeaddress,
 			'employmenttype' => $employmenttype,
 			'employmentstatus' => $employmentstatus,
