@@ -252,7 +252,7 @@ class EmployeeController extends Controller
 		$jobtitle = mb_strtoupper($request->jobtitle);
 		$companyemail = mb_strtolower($request->companyemail);
 		$leaveprivilege = $request->leaveprivilege;
-		$idno = mb_strtoupper($request->idno);
+		$idno = mb_strtoupper($request->nationalid);
 		$employmenttype = $request->employmenttype;
 		$employmentstatus = $request->employmentstatus;
 		$startdate = date("Y-m-d", strtotime($request->startdate));
@@ -286,7 +286,7 @@ class EmployeeController extends Controller
 			'mobileno' => $mobileno,
 			'birthday' => $birthday,
 			'birthplace' => $birthplace,
-			'nationalid' => $nationalid,
+			'nationalid' => $idno,
 			'homeaddress' => $homeaddress,
 			'employmenttype' => $employmenttype,
 			'employmentstatus' => $employmentstatus,
