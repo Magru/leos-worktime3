@@ -38,18 +38,45 @@ class AttendanceController extends Controller
             $emp_id = null;
         }
 
-        if ($request->start && $request->end && $request->emp_id) {
-            $attendance = table::attendanceByPersonAndDate($request->emp_id, $request->start, $request->end)
+        $filter = false;
+        $three_month_average = null;
+        $three_month_125_average = null;
+        $three_month_150_average = null;
+
+        if($request->type === 'avg'){
+            $start_point = \Carbon\Carbon::now()->addMonth(-3);
+            $end_point = new Carbon('last day of last month');
+
+            $query_start = $start_point->firstOfMonth()->toDateString();
+            $query_end = $end_point->toDateString();
+            $filter = true;
+        }
+        elseif($request->start && $request->end && $request->emp_id){
+            $query_start = $request->start;
+            $query_end = $request->end;
+            $filter = true;
+        }
+
+        if($filter){
+            $attendance = table::attendanceByPersonAndDate($request->emp_id, $query_start, $query_end)
                 ->orderBy('date', 'desc')->get();
         }
+
+        if($request->type === 'avg'){
+            $three_month_average = $attendance->sum('realhours') / count($attendance);
+            $three_month_125_average = $attendance->sum('h_125') / count($attendance);
+            $three_month_150_average = $attendance->sum('h_150') / count($attendance);
+        }
+
         $time_format = table::settings()->value("time_format");
         $employee = table::people()->get();
 
-        $hours_to_calculate_sum = $attendance->where('realhours', '>', 0.5)->sum('realhours');
-        $hours_to_calculate_count = $attendance->where('realhours', '>', 0.5)->count();
-
-
-        $hours_sum_net = $hours_to_calculate_sum - ($hours_to_calculate_count * 0.5);
+        $current_m_1 = \Carbon\Carbon::now()->addMonth(-1)->format('m');
+        $current_m_2 = \Carbon\Carbon::now()->addMonth(-2)->format('m');
+        $current_m_3 = \Carbon\Carbon::now()->addMonth(-3)->format('m');
+        $three_month_string = config('app.hebrew_month')[$current_m_1] . ',' .
+                              config('app.hebrew_month')[$current_m_2] . ',' .
+                              config('app.hebrew_month')[$current_m_3] ;
 
 
         return view('admin.attendance', [
@@ -62,6 +89,10 @@ class AttendanceController extends Controller
             'show_nav' => $show_nav,
             'h_125_sum' => $attendance->sum('h_125'),
             'h_150_sum' => $attendance->sum('h_150'),
+            'three_month_string' => $three_month_string,
+            'three_month_average' => $three_month_average,
+            'three_month_125_average' => $three_month_125_average,
+            'three_month_150_average' => $three_month_150_average
         ]);
     }
 
@@ -272,15 +303,20 @@ class AttendanceController extends Controller
 
         $v = $request->validate([
             'emp_id' => 'nullable|max:255',
-            'start' => 'required|max:255',
-            'end' => 'required|max:255'
         ]);
 
+        if($request->type){
+            $start_point = \Carbon\Carbon::now()->addMonth(-3);
+            $end_point = new Carbon('last day of last month');
+
+            $start = $start_point->toDateString();
+            $end = $end_point->toDateString();
+
+        }else{
+            $start = $request->start;
+            $end = $request->end;
+        }
         $emp_id = $request->emp_id;
-
-        $start = $request->start;
-
-        $end = $request->end;
 
         $time_format = table::settings()->value("time_format");
 
@@ -295,7 +331,9 @@ class AttendanceController extends Controller
         return view('admin.attendance', [
             'attendance' => $attendance,
             'employee' => $employee,
-            'time_format' => $time_format
+            'time_format' => $time_format,
+            'show_nav' => true,
+            'emp_id' => $emp_id,
         ]);
     }
 

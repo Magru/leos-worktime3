@@ -57,6 +57,40 @@
             </div>
         </div>
 
+        @if($three_month_average)
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="info-box">
+                    <span class="info-box-icon bg-primary" style="height: 122px; display: flex; justify-content: center; align-items: center; "><i class="fas fa-user-circle" style="margin: 0"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text uppercase">ממוצע ל-3 חודשים</span>
+                        <div class="progress-group">
+                            <div class="progress sm">
+                                <div class="progress-bar bg-primary" style="width: 100%"></div>
+                            </div>
+                            <div class="stats_d">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                    <tr>
+                                        <td><strong>100%</strong></td>
+                                        <td>{{ $three_month_average }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>125%</strong></td>
+                                        <td>{{ $three_month_125_average }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>150%</strong></td>
+                                        <td>{{ $three_month_150_average }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         @if($show_nav)
             @php
                     $now = \Carbon\Carbon::now();
@@ -71,6 +105,10 @@
                 <a href="{{ route('emp-attendance', ['emp_id' => $emp_id, 'start' => $firstDayofPreviousMonth, 'end' => $lastDayofPreviousMonth, 'month']) }}" type="button" class="btn btn-outline-primary m-1">
                     <span>הצד חודש קודם</span>
                     <span>({{ \Carbon\Carbon::now()->startOfMonth()->subMonthsNoOverflow()->format('m/y') }})</span>
+                </a>
+                <a href="{{ route('emp-average', ['emp_id' => $emp_id, 'type' => 'avg', 'month']) }}" type="button" class="btn btn-outline-primary m-1">
+                    <span>ממוצע 3 חודשים אחרונים</span>
+                    <span>({{ $three_month_string }})</span>
                 </a>
             </div>
         @endif
