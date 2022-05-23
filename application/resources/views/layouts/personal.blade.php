@@ -44,11 +44,13 @@
                         <i class="text-secondary fas fa-list"></i><span class="text-with-icon text-uppercase">{{ __("My Attendance") }}</span>
                     </a>
                 </li>
+                @if(0)
                 <li>
                     <a class="nav-link" href="{{ url('/personal/schedule') }}">
                         <i class="text-secondary fas fa-calendar-alt"></i><span class="text-with-icon text-uppercase">{{ __("My Schedule") }}</span>
                     </a>
                 </li>
+                @endif
                 <li>
                     <a class="nav-link" href="{{ url('/personal/leave') }}">
                         <i class="text-secondary fas fa-calendar-plus"></i><span class="text-with-icon text-uppercase">{{ __("My Leave") }}</span>

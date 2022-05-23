@@ -16,6 +16,7 @@ use App\Classes\Table;
 use App\Classes\Permission;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 
@@ -262,6 +263,26 @@ class AttendanceController extends Controller
                 $th = $time1->diffInHours($time2);
                 $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
                 $totalhour = $th . "." . $tm;
+                $realhours = $time1->floatDiffInRealHours($time2);
+
+                $h_125 = 0;
+                $h_150 = 0;
+
+
+                if($person->rest_calc){
+                    $realhours_netto = $realhours > 0.5 ? $realhours - 0.5 : 0;
+                }else{
+                    $realhours_netto = $realhours;
+                }
+
+                if($realhours_netto >= 10.4){
+                    $h_125 = 2;
+                    $h_150 = $realhours_netto - 10.4;
+                }elseif($realhours_netto < 10.4 && $realhours_netto > 8.4){
+                    $h_125 = $realhours_netto - 8.4;
+                }
+
+
 
                 table::attendance()->insert([
                     [
@@ -274,6 +295,11 @@ class AttendanceController extends Controller
                         'timeout' => $date . " " . $clockout,
                         'totalhours' => $totalhour,
                         'status_timeout' => $status_out,
+                        'realhours' => $realhours,
+                        'real_hours_netto' => $realhours_netto,
+                        'h_125' => $h_125,
+                        'h_150' => $h_150,
+                        'edited_by' => Auth::user()->name
                     ],
                 ]);
 
@@ -437,7 +463,8 @@ class AttendanceController extends Controller
                 'real_hours_netto' => $realhours_netto,
                 'h_125' => $h_125,
                 'h_150' => $h_150,
-                'is_request_done' => 1
+                'is_request_done' => 1,
+                'edited_by' => Auth::user()->name
             ]
         );
 
