@@ -88,6 +88,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('admin/employee/update', [EmployeeController::class, 'update']);
             Route::get('admin/employee/archive/{id}', [EmployeeController::class, 'archive']);
             Route::get('admin/employee/delete/{id}', [EmployeeController::class, 'delete']);
+            Route::get('admin/employee/calendar/{id}', [EmployeeController::class, 'calendar'])->name('employee-calendar');
 
             /*
             |--------------------------------------------------------------------------

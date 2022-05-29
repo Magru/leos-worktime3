@@ -16,7 +16,7 @@
     @yield('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/master.css') }}">
 </head>
-<body>
+<body class="{{ $body_class ?? ''}}">
     <div class="wrapper">
         <!-- sidebar navigation component -->
         <nav id="sidebar" class="active">

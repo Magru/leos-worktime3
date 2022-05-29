@@ -21,6 +21,10 @@ class Table
         return $people;
     }
 
+    public static function peopleByIdno($idno){
+        return DB::table('people')->where('idno', $idno);
+    }
+
 
     public static function companydata()
     {

@@ -48,6 +48,21 @@ class EmployeeController extends Controller
 	    ]);
 	}
 
+    public function calendar($idno){
+
+        if (permission::permitted('employees')=='fail'){ return redirect()->route('denied'); }
+
+
+        $employee = table::peopleByIdno($idno)->first();
+        $entries = table::attendanceByPerson($idno)->orderBy('date', 'desc')->get();
+
+        return view('admin.employee-calendar', [
+            'idno' => $idno,
+            'employee' => $employee,
+            'entries' => $entries
+        ]);
+    }
+
     public function store(Request $request)
     {
     	if (permission::permitted('employee-add')=='fail'){ return redirect()->route('denied'); }

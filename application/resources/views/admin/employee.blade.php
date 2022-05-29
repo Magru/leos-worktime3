@@ -92,6 +92,12 @@
                                        class="btn btn-outline-secondary btn-sm btn-rounded btnDelete"
                                        data-bs-toggle="modal" data-bs-target="#confirmationModal"><i
                                                 class="fas fa-trash"></i></a>
+
+                                    <a href="{{ route('employee-calendar', ['id' => $employee->idno]) }}"
+                                       class="btn btn-outline-secondary btn-sm btn-rounded btnDelete">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                    </a>
+
                                 </td>
                             </tr>
                         @endforeach

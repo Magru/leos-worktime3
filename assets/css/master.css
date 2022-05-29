@@ -539,3 +539,80 @@ div.dataTables_wrapper div.dataTables_filter input{
     margin-left: 0!important;
     margin-right: 0.5em;
 }
+.calendar_view main{
+    height: 100%;
+}
+.ui-datepicker.ui-widget.ui-widget-content{
+    width: 100%;
+    height: 100%;
+}
+.ui-datepicker.ui-widget.ui-widget-content table{
+    height: 95%;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+    height: 100%;
+}
+.ui-datepicker-title, .ui-datepicker th{
+    font-family: 'Open Sans', sans-serif!important;
+}
+.ui-state-default, .ui-widget-content .ui-state-default{
+    border: 1px solid #cbcbcb !important;
+    background: #fff;
+}
+.ui-datepicker-header{
+    border-radius: 0!important;
+    background: #fff;
+}
+
+.has-entry{
+    position: relative;
+}
+
+.has-entry a{
+    position: relative;
+    background: #2a9d8f!important;
+    color: #fff;
+}
+.h_125:after{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 15px;
+    top: 15px;
+    border-radius: 50%;
+    background: #f4a261;
+    z-index: 999;
+}
+.h_150:before{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 35px;
+    top: 15px;
+    border-radius: 50%;
+    background: #e76f51;
+    z-index: 999;
+}
+.h_125_circle{
+    background: #f4a261;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.h_150_circle{
+    background: #e76f51;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.hours-info{
+    font-size: 13px;
+    background: #264653;
+    border-radius: 3px;
+    color: #fff;
+    position: absolute;
+    right: 5px;
+    top: 30px;
+}

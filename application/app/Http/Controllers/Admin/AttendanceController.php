@@ -110,6 +110,7 @@ class AttendanceController extends Controller
         return view('admin.attendance-add', ['employee' => $employee, 'time_format' => $time_format]);
     }
 
+
     public function entry(Request $request)
     {
         if (permission::permitted('attendance') == 'fail') {
