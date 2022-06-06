@@ -56,10 +56,14 @@ class EmployeeController extends Controller
         $employee = table::peopleByIdno($idno)->first();
         $entries = table::attendanceByPerson($idno)->orderBy('date', 'desc')->get();
 
+        $leaves = table::leavesByPerson($idno)->get();
+
+
         return view('admin.employee-calendar', [
             'idno' => $idno,
             'employee' => $employee,
-            'entries' => $entries
+            'entries' => $entries,
+            'leaves' => $leaves
         ]);
     }
 

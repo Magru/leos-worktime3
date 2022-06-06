@@ -39,6 +39,8 @@
             @if($entries)
                 @foreach($entries as $_e)
                     {
+                        type: 'workday',
+                        reason: null,
                         realhours : '{{ $_e->realhours }}',
                         h_125: {{ $_e->h_125 }},
                         h_150: {{ $_e->h_150 }},
@@ -46,6 +48,28 @@
                         timein: @if($_e->timein) new Date({{ strtotime($_e->timein) }}000) @else null @endif,
                         timeout: @if($_e->timeout) new Date({{ strtotime($_e->timeout) }}000) @else null @endif,
                     },
+                @endforeach
+            @endif
+
+            @if($leaves)
+                @foreach($leaves as $_l)
+                        @php
+                            $begin = new DateTime( $_l->leavefrom );
+                            $end   = new DateTime( $_l->leaveto );
+                        @endphp
+                    @for($i = $begin; $i <= $end; $i->modify('+1 day'))
+                {
+                    type: 'leave',
+                    reason: '{{ $_l->type }}',
+                    realhours : null,
+                    h_125: null,
+                    h_150: null,
+                    date : new Date({{ $i->getTimestamp() }}000),
+                    timein: null,
+                    timeout:  null,
+
+                },
+                    @endfor
                 @endforeach
             @endif
         ];

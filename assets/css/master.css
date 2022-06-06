@@ -570,8 +570,13 @@ div.dataTables_wrapper div.dataTables_filter input{
 
 .has-entry a{
     position: relative;
-    background: #2a9d8f!important;
     color: #fff;
+}
+.has-entry.workday-entry a{
+    background: #2a9d8f!important;
+}
+.has-entry.leave-entry a{
+    background: yellow!important;
 }
 .h_125:after{
     content: '';
@@ -615,4 +620,10 @@ div.dataTables_wrapper div.dataTables_filter input{
     position: absolute;
     right: 5px;
     top: 30px;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight{
+    background: transparent!important;
+}
+.ui-datepicker-current-day.ui-datepicker-today a{
+    border: 1px solid coral!important;
 }

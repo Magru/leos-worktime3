@@ -4,6 +4,23 @@ $( function() {
         return String(num).padStart(2, '0');
     }
 
+    function dayInfo(){
+        $('.has-entry').each(function(){
+            if($(this).hasClass('leave-entry')){
+                const title = $(this).attr('title');
+                $(this).find('a').append('<span class="hours-info">סוג חופשה: '+title+'</span>');
+            }else{
+                const title = $(this).attr('title');
+                const title_split = title.split('-');
+                const timein = title_split[1];
+                const timeout = title_split[2];
+
+                $(this).find('a').append('<span class="hours-info">in:'+ timein + ' - ' + 'out:' + timeout + '</span>')
+            }
+
+        })
+    }
+
     $( "#datepicker" ).datepicker({
         inline: true,
         showOtherMonths: true,
@@ -22,6 +39,9 @@ $( function() {
         },
         onChangeMonthYear: function (year, month, inst) {
             $(".active-month").attr('data-month', month).attr('data-year', year);
+            setTimeout(function (){
+                dayInfo();
+            }, 1000)
         },
         beforeShowDay : function(date){
             let res = [true, '', ''];
@@ -33,6 +53,12 @@ $( function() {
                 if(date.getFullYear() == d.getFullYear() && date.getMonth() == d.getMonth() && date.getDate() == d.getDate()) {
 
                     classes += ' has-entry ';
+
+                    if(entries[i].type === 'workday'){
+                        classes += ' workday-entry '
+                    }else if(entries[i].type === 'leave'){
+                        classes += ' leave-entry '
+                    }
 
                     if(entries[i].h_125){
                         classes += ' h_125 '
@@ -53,7 +79,13 @@ $( function() {
                     const hours_in = entries[i].timein ? padTo2Digits(entries[i].timein.getHours()) +  ":" + padTo2Digits(entries[i].timein.getMinutes())  : null;
                     const hours_out = entries[i].timeout ? padTo2Digits(entries[i].timeout.getHours()) +  ":" + padTo2Digits(entries[i].timeout.getMinutes()) : null;
 
-                    res = [true, classes, entries[i].realhours + '-' +  hours_in + '-' + hours_out];
+                    if(entries[i].type === 'workday'){
+                        res = [true, classes, entries[i].realhours + '-' +  hours_in + '-' + hours_out];
+                    }else if(entries[i].type === 'leave'){
+                        res = [true, classes, entries[i].reason];
+                    }
+
+
                 }
             }
 
@@ -63,17 +95,7 @@ $( function() {
 
 
 
-    $('.has-entry').each(function(){
-        const title = $(this).attr('title');
-        const title_split = title.split('-');
-        const timein = title_split[1];
-        const timeout = title_split[2];
+    dayInfo();
 
-        $(this).find('a').append('<span class="hours-info">in:'+ timein + ' - ' + 'out:' + timeout + '</span>')
-    })
-
-    if ($.fn.datepicker) {
-
-    }
 
 } );

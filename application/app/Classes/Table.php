@@ -62,6 +62,11 @@ class Table
         return $leaves;
     }
 
+    public static function leavesByPerson($idno)
+    {
+        return DB::table('people_leaves')->where(['idno' => $idno, 'status' => 'Approved']);
+    }
+
     public static function schedules()
     {
         $schedules = DB::table('people_schedules');
