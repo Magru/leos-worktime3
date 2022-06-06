@@ -613,13 +613,23 @@ div.dataTables_wrapper div.dataTables_filter input{
     border-radius: 50%;
 }
 .hours-info{
-    font-size: 13px;
-    background: #264653;
-    border-radius: 3px;
-    color: #fff;
     position: absolute;
     right: 5px;
     top: 30px;
+}
+.hours-info-inout{
+    background: #264653;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    margin: 2px;
+}
+.hours-info .add-info{
+    background: #fff;
+    border-radius: 3px;
+    color: #000;
+    font-size: 13px;
+    margin: 2px;
 }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight{
     background: transparent!important;

@@ -33,6 +33,16 @@ class LeaveController extends Controller
         ]);
     }
 
+    public function add()
+    {
+        if (permission::permitted('leave-edit')=='fail'){ return redirect()->route('denied'); }
+
+
+        return view('admin.leave-add', [
+
+        ]);
+    }
+
     public function edit($id, Request $request) 
     {
         if (permission::permitted('leave-edit')=='fail'){ return redirect()->route('denied'); }

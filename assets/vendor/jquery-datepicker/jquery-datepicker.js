@@ -14,8 +14,15 @@ $( function() {
                 const title_split = title.split('-');
                 const timein = title_split[1];
                 const timeout = title_split[2];
+                const realhours = title_split[3];
+                let html = '<span class="hours-info d-flex">';
+                html += '<span class="hours-info-inout"> <span><i class="fa-solid fa-right-to-bracket pl-1"></i> '+timein+'</span>'
+                html += '<span><i class="fa-solid fa-right-from-bracket pl-1"></i> '+timeout+'</span></span>'
+                html += '<span class="add-info"><i class="fa-solid fa-clock"></i> ' + realhours + '</span>'
+                html += '</span>';
 
-                $(this).find('a').append('<span class="hours-info">in:'+ timein + ' - ' + 'out:' + timeout + '</span>')
+
+                $(this).find('a').append(html);
             }
 
         })
@@ -80,7 +87,7 @@ $( function() {
                     const hours_out = entries[i].timeout ? padTo2Digits(entries[i].timeout.getHours()) +  ":" + padTo2Digits(entries[i].timeout.getMinutes()) : null;
 
                     if(entries[i].type === 'workday'){
-                        res = [true, classes, entries[i].realhours + '-' +  hours_in + '-' + hours_out];
+                        res = [true, classes, entries[i].realhours + '-' +  hours_in + '-' + hours_out + '-' + entries[i].realhours];
                     }else if(entries[i].type === 'leave'){
                         res = [true, classes, entries[i].reason];
                     }

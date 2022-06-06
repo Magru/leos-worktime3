@@ -124,6 +124,7 @@ Route::middleware(['auth'])->group(function () {
             |--------------------------------------------------------------------------
             */
             Route::get('admin/leave', [LeaveController::class, 'index'])->name('admin-leave');
+            Route::get('admin/leave/add', [LeaveController::class, 'add'])->name('admin-leave-add');
             Route::post('admin/leave', [LeaveController::class, 'filter']);
             Route::get('admin/leave/edit/{id}', [LeaveController::class, 'edit']);
             Route::post('admin/leave/update', [LeaveController::class, 'update']);

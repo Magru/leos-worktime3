@@ -39,8 +39,10 @@
                     </h2>
                 </div>
 
-                <div class="col-md-6 mb-1 text-end">
-                    
+                <div class="col-md-6 mb-1 d-flex align-items-center justify-content-end">
+                    <a href="{{ url('/admin/leave/add') }}" class="btn btn-outline-primary btn-sm float-end">
+                        <i class="fas fa-plus"></i><span class="button-with-icon">הוסף</span>
+                    </a>
                 </div>
             </div>
         </div>
