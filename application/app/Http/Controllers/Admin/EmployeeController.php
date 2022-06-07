@@ -105,7 +105,6 @@ class EmployeeController extends Controller
 		$civilstatus = mb_strtoupper($request->civilstatus);
 		$mobileno = $request->mobileno;
 		$birthday = date("Y-m-d", strtotime($request->birthday));
-		$nationalid = mb_strtoupper($request->nationalid);
 		$birthplace = mb_strtoupper($request->birthplace);
 		$homeaddress = mb_strtoupper($request->homeaddress);
 		$company = mb_strtoupper($request->company);
@@ -119,6 +118,7 @@ class EmployeeController extends Controller
 		$startdate = date("Y-m-d", strtotime($request->startdate));
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
         $rest_calc = $request->rest_calc ?: 0;
+        $free_in = $request->free_in ?: 0;
 
 		$is_idno_taken = table::companydata()->where('idno', $idno)->exists();
 
@@ -154,12 +154,12 @@ class EmployeeController extends Controller
 				'mobileno' => $mobileno,
 				'birthday' => $birthday,
 				'birthplace' => $birthplace,
-				'nationalid' => $nationalid,
 				'homeaddress' => $homeaddress,
 				'employmenttype' => $employmenttype,
 				'employmentstatus' => $employmentstatus,
 				'avatar' => $name,
-                'rest_calc' => $rest_calc
+                'rest_calc' => $rest_calc,
+                'free_in' => $free_in
             ],
     	]);
 
@@ -275,6 +275,7 @@ class EmployeeController extends Controller
 		$startdate = date("Y-m-d", strtotime($request->startdate));
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
         $rest_calc = $request->rest_calc ?: 0;
+        $free_in = $request->free_in ?: 0;
 
 
         $file = $request->file('image');
@@ -308,7 +309,8 @@ class EmployeeController extends Controller
 			'employmenttype' => $employmenttype,
 			'employmentstatus' => $employmentstatus,
 			'avatar' => $name,
-            'rest_calc' => $rest_calc
+            'rest_calc' => $rest_calc,
+            'free_in' => $free_in
         ]);
 
 		table::companydata()->where('reference', $id)->update([

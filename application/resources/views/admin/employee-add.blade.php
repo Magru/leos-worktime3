@@ -234,6 +234,12 @@
                                 <label class="form-check-label" for="rest_calc">חישוב הפסקה</label>
                             </div>
                         </div>
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" value="1" checked id="free_in" name="free_in">
+                                <label class="form-check-label" for="free_in">כניסה חופשית</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
