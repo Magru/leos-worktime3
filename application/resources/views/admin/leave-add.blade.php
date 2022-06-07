@@ -5,6 +5,13 @@
     <meta name="description" content="Workday Edit Leave">
 @endsection
 
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/assets/vendor/select2-bootstrap-5/select2-bootstrap-5-theme.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/airdatepicker/css/datepicker.min.css') }}">
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -31,33 +38,48 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="employee" class="form-label">{{ __("Employee") }}</label>
-                        <input type="text" name="employee" value="@isset($leave->employee){{ $leave->employee }}@endisset" class="form-control" readonly>
+                        <select name="employee" class="form-select form-select-sm select-search-sm">
+                            <option selected disabled>בחר...</option>
+                            @isset($employee)
+                                @foreach ($employee as $data)
+                                    <option value="{{ $data->idno }}">{{ $data->lastname }}
+                                        , {{ $data->firstname }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="type" class="form-label">{{ __("Leave Type") }}</label>
-                        <input type="text" name="type" value="@isset($leave->type){{ $leave->type }}@endisset" class="form-control" readonly>
+                        <select name="type" class="form-select" required>
+                            <option value="" disabled selected>בחר...</option>
+                            @isset($leave_type)
+                                @foreach ($leave_type as $data)
+                                    <option value="{{ $data->leavetype }}" data-id="{{ $data->id }}">{{ $data->leavetype }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
                     </div>
 
                     <div class="row g-2">
                         <div class="mb-3 col-md-6">
                             <label for="leavefrom" class="form-label">{{ __("Leave From") }}</label>
-                            <input type="text" name="leavefrom" value="@isset($leave->leavefrom){{ $leave->leavefrom }}@endisset" class="form-control" readonly>
+                            <input type="text" name="leavefrom" value="" class="airdatepicker form-control" placeholder="DD-MM-YYYY" required>
                         </div>
-                        <div class="mb-3 col-md-6">
+                        <div class="mb-3 col-md-6" >
                             <label for="leaveto" class="form-label">{{ __("Leave Until") }}</label>
-                            <input type="text" name="leaveto" value="@isset($leave->leaveto){{ $leave->leaveto }}@endisset" class="form-control" readonly>
+                            <input type="text" name="leaveto" value="" class="airdatepicker form-control" placeholder="DD-MM-YYYY" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="returndate" class="form-label">{{ __("Return Date") }}</label>
-                        <input type="text" name="returndate" value="@isset($leave->returndate){{ $leave->returndate }}@endisset" class="form-control" readonly>
+                        <input type="text" name="returndate" value="" class="airdatepicker form-control" placeholder="DD-MM-YYYY" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="reason" class="form-label">{{ __("Reason") }}</label>
-                        <textarea rows="5" name="reason" value="@isset($leave->reason){{ $leave->reason }}@endisset" class="form-control text-uppercase" readonly>@isset($leave->reason){{ $leave->reason }}@endisset</textarea>
+                        <textarea rows="5" name="reason" value="" class="form-control text-uppercase" required></textarea>
                     </div>
 
                     <hr>
@@ -95,4 +117,9 @@
 
 @section('scripts')
     <script src="{{ asset('/assets/js/validate-form.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/initiate-select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/airdatepicker/js/datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/airdatepicker/js/i18n/datepicker.en.js') }}"></script>
+    <script src="{{ asset('/assets/js/initiate-airdatepicker.js') }}"></script>
 @endsection

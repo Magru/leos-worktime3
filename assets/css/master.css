@@ -637,3 +637,10 @@ div.dataTables_wrapper div.dataTables_filter input{
 .ui-datepicker-current-day.ui-datepicker-today a{
     border: 1px solid coral!important;
 }
+.leave-type{
+    background: indianred;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    margin: 2px;
+}

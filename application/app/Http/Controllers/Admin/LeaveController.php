@@ -37,10 +37,56 @@ class LeaveController extends Controller
     {
         if (permission::permitted('leave-edit')=='fail'){ return redirect()->route('denied'); }
 
+        $employee = table::people()->get();
+        $leave_type = table::leavetypes()->get();
 
         return view('admin.leave-add', [
-
+            'employee' => $employee,
+            'leave_type' => $leave_type
         ]);
+    }
+
+    public function store(Request $request){
+        $v = $request->validate([
+            'employee' => 'required',
+            'leavefrom' => 'required|date|max:15',
+            'leaveto' => 'required|date|max:15',
+            'returndate' => 'required|date|max:15',
+        ]);
+
+        $typeid = $request->typeid;
+
+        $type = mb_strtoupper($request->type);
+
+        $reason = mb_strtoupper($request->reason);
+
+        $leavefrom = date("Y-m-d", strtotime($request->leavefrom));
+
+        $leaveto = date("Y-m-d", strtotime($request->leaveto));
+
+        $returndate = date("Y-m-d", strtotime($request->returndate));
+
+        $employee_obj = table::people()->where('idno', $request->employee)->first();
+
+        $id = $employee_obj->id;
+
+        $idno = $request->employee;
+
+
+        table::leaves()->insert([
+            'reference' => $id,
+            'idno' => $idno,
+            'employee' => $employee_obj->lastname.', '.$employee_obj->firstname,
+            'type' => $type,
+            'typeid' => $typeid,
+            'leavefrom' => $leavefrom,
+            'leaveto' => $leaveto,
+            'returndate' => $returndate,
+            'reason' => $reason,
+            'status' => 'Approved',
+        ]);
+
+        return redirect('admin/leave')->with('success', 'נשמר בהצלחה');
     }
 
     public function edit($id, Request $request) 

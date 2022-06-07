@@ -8,7 +8,13 @@ $( function() {
         $('.has-entry').each(function(){
             if($(this).hasClass('leave-entry')){
                 const title = $(this).attr('title');
-                $(this).find('a').append('<span class="hours-info">סוג חופשה: '+title+'</span>');
+                let html = '<span class="hours-info leave-type">';
+                html += '<i class="fa-solid fa-house-user"></i> ';
+                html += title
+                html += '</span>';
+
+
+                $(this).find('a').append(html);
             }else{
                 const title = $(this).attr('title');
                 const title_split = title.split('-');
