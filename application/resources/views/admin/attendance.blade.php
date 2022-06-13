@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 page-header">
                 <div class="row g-1">
@@ -173,6 +173,7 @@
                         <th>{{ __('Clock Out') }}</th>
                         <th>שעות ברוטו</th>
                         <th>שעות נטו</th>
+                        <th>100%</th>
                         <th>125%</th>
                         <th>150%</th>
                         <th>{{ __('Status') }} ({{ __("In") }}/{{ __("Out") }})</th>
@@ -213,6 +214,7 @@
                                 </td>
                                 <td>{{ $data->realhours }}</td>
                                 <td>{{ $data->real_hours_netto }}</td>
+                                <td>{{ $data->real_hours_netto - $data->h_125 - $data->h_150 }}</td>
                                 <td>{{ $data->h_125 }}</td>
                                 <td>{{ $data->h_150 }}</td>
                                 <td>
@@ -253,6 +255,7 @@
                         <th>@isset($hours_sum_net)
                                 {{ @$hours_sum_net  }}
                             @endisset</th>
+                        <th>100%</th>
                         <th>@isset($h_125_sum)
                                 {{ @$h_125_sum  }}
                             @endisset</th>
