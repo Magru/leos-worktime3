@@ -129,10 +129,6 @@ class ClockController extends Controller
 
                 if(!$allow_early_in->free_in){
 
-
-                    var_dump(strtotime(date('H:i')));
-                    var_dump(config('app.in_hour'));
-
                     if(!(strtotime(date('H:i')) > config('app.in_hour'))){
                         return response()->json([
                             "error" => 'אין אפשרות לעשות כניסה לפני ' . config('app.in_hour_text'),
