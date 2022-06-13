@@ -249,7 +249,7 @@ return [
         '12' => 'דצמבר',
     ],
 
-    'in_hour' => strtotime('14:00'),
-    'in_hour_text' => '14:00'
+    'in_hour' => strtotime('8:00'),
+    'in_hour_text' => '8:00'
 
 ];
