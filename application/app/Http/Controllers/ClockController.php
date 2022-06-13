@@ -125,7 +125,7 @@ class ClockController extends Controller
 
             } else {
 
-                $allow_early_in = table::people()->where([['idno', $idno]])->first('free_in');
+                $allow_early_in = table::people()->where('idno', $idno)->first('free_in');
 
                 if(!$allow_early_in->free_in){
 

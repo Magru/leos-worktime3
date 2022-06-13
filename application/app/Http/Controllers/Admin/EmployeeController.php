@@ -146,6 +146,7 @@ class EmployeeController extends Controller
     		[
 				'lastname' => $lastname,
 				'firstname' => $firstname,
+                'idno' => $idno,
 				'mi' => $mi,
 				'age' => $age,
 				'gender' => $gender,
@@ -310,7 +311,7 @@ class EmployeeController extends Controller
 			'employmentstatus' => $employmentstatus,
 			'avatar' => $name,
             'rest_calc' => $rest_calc,
-            'free_in' => $free_in
+            'free_in' => $free_in,
         ]);
 
 		table::companydata()->where('reference', $id)->update([
