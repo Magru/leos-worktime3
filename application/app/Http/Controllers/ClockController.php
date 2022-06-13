@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 
 class ClockController extends Controller
 {
+
     
     public function index()
     {
@@ -103,6 +104,8 @@ class ClockController extends Controller
         
         $timeformat = $settings->time_format;
 
+
+
         if ($type == 'clockin') 
         {
             //$has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
@@ -121,6 +124,22 @@ class ClockController extends Controller
                 ]);
 
             } else {
+
+                $allow_early_in = table::people()->where([['idno', $idno]])->first('free_in');
+
+                if(!$allow_early_in->free_in){
+
+
+                    var_dump(strtotime(date('H:i')));
+                    var_dump(config('app.in_hour'));
+
+                    if(!(strtotime(date('H:i')) > config('app.in_hour'))){
+                        return response()->json([
+                            "error" => 'אין אפשרות לעשות כניסה לפני ' . config('app.in_hour_text'),
+                        ]);
+                    }
+                }
+
 
                 $last_in_notimeout = table::attendance()->where([['idno', $idno],['timeout', NULL]])->count();
 
