@@ -7,6 +7,8 @@
 * Author: Brian Luna
 * Copyright 2022 Codefactor
 */
+
+use App\Http\Controllers\Admin\MessageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AccountController;
@@ -193,6 +195,17 @@ Route::middleware(['auth'])->group(function () {
             */
             Route::get('admin/settings', [SettingsController::class, 'settings'])->name('admin-settings');
             Route::post('admin/settings/update', [SettingsController::class, 'update']);
+
+
+            /*
+            |--------------------------------------------------------------------------
+            |Messages
+            |--------------------------------------------------------------------------
+            */
+            Route::get('admin/messages/create', [MessageController::class, 'create'])->name('message.create');
+            Route::post('admin/messages/store', [MessageController::class, 'store'])->name('message.store');
+            Route::get('admin/messages', [MessageController::class, 'index'])->name('message.index');
+
 
             /*
             |--------------------------------------------------------------------------

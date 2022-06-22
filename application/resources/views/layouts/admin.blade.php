@@ -61,6 +61,12 @@
                         <i class="text-secondary fas fa-user-circle"></i><span class="text-with-icon text-uppercase">{{ __("Users") }}</span>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{ route('message.create') }}">
+                        <i class="fa-solid fa-message"></i>
+                        <span class="text-with-icon text-uppercase">הודעה חדשה</span>
+                    </a>
+                </li>
                 @if(0)
                 <li>
                     <a class="nav-link" href="{{ url('/admin/settings') }}">

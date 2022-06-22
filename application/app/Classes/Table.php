@@ -21,7 +21,8 @@ class Table
         return $people;
     }
 
-    public static function peopleByIdno($idno){
+    public static function peopleByIdno($idno)
+    {
         return DB::table('people')->where('idno', $idno);
     }
 
@@ -131,6 +132,15 @@ class Table
     {
         $settings = DB::table('settings');
         return $settings;
+    }
+
+    public static function messages()
+    {
+        return DB::table('messages');
+    }
+
+    public function departmentByID($id){
+        return DB::table('form_department')->where('id', $id)->first();
     }
 
 }
