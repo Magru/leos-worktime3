@@ -55,6 +55,22 @@
         </div>
     </div>
 
+    <!-- message container -->
+
+    <div class="modal" tabindex="-1" id="message_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title">יש לך הודעה</h5>
+                </div>
+                <div class="modal-body text-right" id="modal-message">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- notification container -->
     <div class="position-fixed p-3 d-flex justify-content-center align-items-cente" style="z-index: 9; left: 0; right: 0; bottom: 0;">
         <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
@@ -94,6 +110,8 @@
         var idno = $('input[name="idno"]').val();
         idno.toUpperCase();
 
+        const modal = new bootstrap.Modal(document.getElementById('message_modal'), {})
+
         $.ajax({
             url: url + '/webclock/clocking',
             type: 'post',
@@ -110,6 +128,9 @@
                     // insert new text
                     $('#message').text(response['error']);
                     $('#employee').text(response['employee']);
+
+
+
 
                     toast.show();
 
@@ -129,6 +150,11 @@
                     $('#type').text(type(response['type']));
                     $('#employee').text(response['employee']);
                     $('#time').html('<span class="fw-bolder">' + response['time'] + '</span>');
+
+                    if(response['message'] != null){
+                        $('#modal-message').html(response['message'])
+                        modal.show();
+                    }
 
                     toast.show();
                 }

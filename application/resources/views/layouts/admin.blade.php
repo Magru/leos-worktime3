@@ -67,6 +67,14 @@
                         <span class="text-with-icon text-uppercase">הודעה חדשה</span>
                     </a>
                 </li>
+
+                <li>
+                    <a class="nav-link" href="{{ route('message.index') }}">
+                        <i class="fa-solid fa-message"></i>
+                        <span class="text-with-icon text-uppercase">הודעות</span>
+                    </a>
+                </li>
+
                 @if(0)
                 <li>
                     <a class="nav-link" href="{{ url('/admin/settings') }}">

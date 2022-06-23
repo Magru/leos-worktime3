@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Carbon;
+
 return [
 
     /*
@@ -249,7 +251,7 @@ return [
         '12' => 'דצמבר',
     ],
 
-    'in_hour' => strtotime('8:00'),
+    'in_hour' => Carbon::parse(strtotime('8:00')),
     'in_hour_text' => '8:00'
 
 ];

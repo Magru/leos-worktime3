@@ -16,9 +16,8 @@ class MessageController extends Controller
 
         $messages = table::messages()->get();
 
-
         return view('admin.message-index', [
-            'messages' => $messages
+            'messages' => $messages,
         ]);
     }
 
@@ -26,9 +25,12 @@ class MessageController extends Controller
     {
 
         $departments = table::department()->get();
+        $employee = table::people()->get();
+
 
         return view('admin.message-add', [
-            'departments' => $departments
+            'departments' => $departments,
+            'employee' => $employee
         ]);
     }
 
@@ -38,13 +40,16 @@ class MessageController extends Controller
         $message = $request->message;
         $departments = json_encode($request->departments);
         $expiry = $request->valid_date;
+        $employees = json_encode($request->employee);
+
 
         table::messages()->insert([
             'is_active' => 1,
             'msg' => $message,
             'expiry' => $expiry,
             'departments' => $departments,
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
+            'employees' => $employees
         ]);
 
         return redirect('admin/messages')->with('success', 'הודעה נשמרה בהצלחה');

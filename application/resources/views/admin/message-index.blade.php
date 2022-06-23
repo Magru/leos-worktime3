@@ -33,6 +33,7 @@
                         <th>תאריך</th>
                         <th>תוכן</th>
                         <th>מחלקות</th>
+                        <th>עובדים</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,11 +54,25 @@
                                     </div>
                                 </td>
                                 <th>
-                                    @foreach(json_decode($_m->departments) as $_d)
-                                        <span class="badge bg-secondary">
+                                    <div class="d-flex justify-content-center">
+                                        @foreach(json_decode($_m->departments) as $_d)
+                                            <span class="badge bg-secondary mx-1">
                                             {{ $_d }}
                                         </span>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="d-flex justify-content-center w-100">
+                                        @foreach(json_decode($_m->employees) as $_e)
+                                            <span class="badge bg-primary mx-1">
+                                            @php
+                                                $emp = DB::table('people')->where('idno', $_e)->first()
+                                            @endphp
+                                                {{ $emp->firstname . ' ' . $emp->lastname }}
+                                        </span>
+                                        @endforeach
+                                    </div>
                                 </th>
                             </tr>
                         @endforeach

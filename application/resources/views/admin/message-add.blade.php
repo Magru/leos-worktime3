@@ -8,6 +8,8 @@
 @section('styles')
     <script src="https://cdn.tiny.cloud/1/p3znvo2hy8sv204ffo3j3ezqoh7s0equvpbpk1lwadopxasw/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/select2-bootstrap-5/select2-bootstrap-5-theme.min.css') }}">
 @endsection
 
 @section('content')
@@ -65,6 +67,18 @@
                                     <label for="valid_date">תאריך</label>
                                     <input name="valid_date" class="form-control" id="valid_date" type="date">
                                 </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="employee" class="form-label">{{ __("Employee") }}</label>
+                                        <select name="employee[]" id="employee" class="form-select select-search" multiple="multiple">
+                                            @isset($employee)
+                                                @foreach ($employee as $data)
+                                                    <option value="{{ $data->idno }}" data-reference="{{ $data->id }}">{{ $data->lastname }}, {{ $data->firstname }}</option>
+                                                @endforeach
+                                            @endisset
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,6 +101,8 @@
 
 @section('scripts')
     <script src="{{ asset('/assets/js/validate-form.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/initiate-select2.js') }}"></script>
     <script src="{{ asset('/assets/js/he_IL.js') }}"></script>
     <script>
         tinymce.init({
