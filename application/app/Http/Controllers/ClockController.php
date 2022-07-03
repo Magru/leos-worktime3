@@ -178,14 +178,14 @@ class ClockController extends Controller
                     ]);
 
 
-                    $message = table::messages()->whereJsonContains('employees', $idno)->first();
-
-                    if(!$message){
-                        $people_department = table::companydata()->where('idno', $idno)->first();
-                        if ($people_department) {
-                            $message = table::messages()->whereJsonContains('departments', $people_department->department)->first();
-                        }
-                    }
+//                    $message = table::messages()->whereJsonContains('employees', $idno)->first();
+//
+//                    if(!$message){
+//                        $people_department = table::companydata()->where('idno', $idno)->first();
+//                        if ($people_department) {
+//                            $message = table::messages()->whereJsonContains('departments', $people_department->department)->first();
+//                        }
+//                    }
 
 
                     return response()->json([
@@ -193,7 +193,7 @@ class ClockController extends Controller
                         "time" => $time,
                         "date" => $date,
                         "employee" => $employee,
-                        "message" => $message->msg
+//                        "message" => $message->msg
                     ]);
                 }
             }
