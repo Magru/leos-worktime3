@@ -16,6 +16,7 @@ class MessageController extends Controller
 
         $messages = table::messages()->get();
 
+
         return view('admin.message-index', [
             'messages' => $messages,
         ]);
@@ -47,7 +48,7 @@ class MessageController extends Controller
             'is_active' => 1,
             'msg' => $message,
             'expiry' => $expiry,
-            'departments' => $departments,
+            'departments' => $departments ?:     null,
             'created_at' => Carbon::now(),
             'employees' => $employees
         ]);

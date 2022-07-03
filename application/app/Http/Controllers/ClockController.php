@@ -125,8 +125,10 @@ class ClockController extends Controller
                     $in_hour = config('app.in_hour');
                     $now = Carbon::now();
 
+//                    var_dump($now->toDateTimeString());
+//                    var_dump($in_hour->toDateTimeString());
 
-                    if (!$now->gt($in_hour)) {
+                    if ($now->greaterThan($in_hour)) {
                         return response()->json([
                             "error" => 'אין אפשרות לעשות כניסה לפני ' . config('app.in_hour_text'),
                         ]);
@@ -175,13 +177,14 @@ class ClockController extends Controller
                         ],
                     ]);
 
-                    $message = null;
 
-                    $people_department = table::companydata()->where('idno', $idno)->first();
+                    $message = table::messages()->whereJsonContains('employees', $idno)->first();
 
-
-                    if ($people_department) {
-                        $message = table::messages()->whereJsonContains('departments', $people_department->department)->first();
+                    if(!$message){
+                        $people_department = table::companydata()->where('idno', $idno)->first();
+                        if ($people_department) {
+                            $message = table::messages()->whereJsonContains('departments', $people_department->department)->first();
+                        }
                     }
 
 

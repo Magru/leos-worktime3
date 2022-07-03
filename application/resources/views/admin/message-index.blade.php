@@ -55,23 +55,27 @@
                                 </td>
                                 <th>
                                     <div class="d-flex justify-content-center">
-                                        @foreach(json_decode($_m->departments) as $_d)
-                                            <span class="badge bg-secondary mx-1">
+                                        @if(!($_m->departments == 'null'))
+                                            @foreach(json_decode($_m->departments) as $_d)
+                                                <span class="badge bg-secondary mx-1">
                                             {{ $_d }}
                                         </span>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </th>
                                 <th>
                                     <div class="d-flex justify-content-center w-100">
-                                        @foreach(json_decode($_m->employees) as $_e)
-                                            <span class="badge bg-primary mx-1">
+                                        @if(!is_null($_m->employees))
+                                            @foreach(json_decode($_m->employees) as $_e)
+                                                <span class="badge bg-primary mx-1">
                                             @php
                                                 $emp = DB::table('people')->where('idno', $_e)->first()
                                             @endphp
-                                                {{ $emp->firstname . ' ' . $emp->lastname }}
+                                                    {{ $emp->firstname . ' ' . $emp->lastname }}
                                         </span>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </th>
                             </tr>
