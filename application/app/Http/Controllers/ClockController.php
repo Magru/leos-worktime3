@@ -124,7 +124,10 @@ class ClockController extends Controller
 
                     $in_hour = config('app.in_hour');
                     $now = Carbon::now();
-                    
+
+                    var_dump($now->toDateString());
+                    var_dump($in_hour->toDateString());
+                    var_dump($now->greaterThan($in_hour));
 
                     if ($now->greaterThan($in_hour)) {
                         return response()->json([
