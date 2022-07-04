@@ -129,7 +129,7 @@ class ClockController extends Controller
                     var_dump($in_hour->toDateTimeString());
                     var_dump($now->greaterThan($in_hour));
 
-                    if ($now->greaterThan($in_hour)) {
+                    if (!$now->greaterThan($in_hour)) {
                         return response()->json([
                             "error" => 'אין אפשרות לעשות כניסה לפני ' . config('app.in_hour_text'),
                         ]);
