@@ -124,12 +124,9 @@ class ClockController extends Controller
 
                     $in_hour = config('app.in_hour');
                     $now = Carbon::now();
+                    
 
-                    var_dump($now->toDateTimeString());
-                    var_dump($in_hour->toDateTimeString());
-                    var_dump($now->greaterThan($in_hour));
-
-                    if (!$now->greaterThan($in_hour)) {
+                    if ($now->greaterThan($in_hour)) {
                         return response()->json([
                             "error" => 'אין אפשרות לעשות כניסה לפני ' . config('app.in_hour_text'),
                         ]);
